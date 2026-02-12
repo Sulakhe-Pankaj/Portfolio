@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Profile</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="/static/assets/css/ready.css">
+    <link rel="stylesheet" href="/static/assets/css/demo.css">
+    <style>
+        .profile{
+            width: auto;
+            padding-top: 100px;
+            margin: 0px auto;
+            /* overflow: auto; */
+
+        }
+
+        .profile-form {
+            max-width: 75%;
+            margin: 0px auto 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-form label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .profile-form input,
+        .profile-form textarea {
+            width: 100%;
+            padding: 8px 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .profile-form button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            background: #2563eb;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .profile-form button:hover {
+            background: #1e40af;
+        }
+    </style>
+</head>
+
+<body>
+    {%include 'admin_panel/navbar.html'%}
+
+    <div class="profile">
+        <form action="/save_user/" method="POST" enctype="multipart/form-data" class="profile-form">
+  <h2>Update Profile</h2>
+  {%csrf_token%}
+
+  <label>
+    Full Name
+    <input type="text" name="name" placeholder="Enter full name" required>
+  </label>
+  <label>
+    Password
+    <input type="password" name="password" placeholder="Enter Password" required>
+  </label>
+
+  <label>
+    Email (cannot change without verification)
+    <input type="email" name="email" placeholder="Enter email" required>
+  </label>
+
+  <label>
+    Mobile Number
+    <input type="tel" name="mobile" placeholder="Enter mobile number" pattern="[0-9]{10}" required>
+  </label>
+
+  <label>
+    Address
+    <textarea name="address" rows="3" placeholder="Enter address"></textarea>
+  </label>
+
+  <label>
+    Date of Birth
+    <input type="date" name="dob" required>
+  </label>
+
+  <label>
+    Profile Image
+    <input type="file" name="profile_image">
+  </label>
+  <label>
+    Background Image
+    <input type="file" name="bg_image">
+  </label>
+  <label>
+    Facebook
+    <input type="url" name="facebook" placeholder="https://facebook.com">
+  </label>
+  <label>
+    Linkedin
+    <input type="url" name="linkedin" placeholder="https://linkedin.com">
+  </label>
+
+  <button type="submit">Save Changes</button>
+</form>
+    </div>
+
+
+
+
+
+    {% include 'admin_panel/footer.html' %} 
