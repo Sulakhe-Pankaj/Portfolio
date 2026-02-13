@@ -126,8 +126,130 @@
 </form>
     </div>
 
+    <style>
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+}
 
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background: #fff;
+}
 
+.custom-table thead {
+    background: #111827;
+    color: #ffffff;
+}
 
+.custom-table th,
+.custom-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    font-size: 14px;
+}
 
+.custom-table tbody tr:nth-child(even) {
+    background: #f9fafb;
+}
+
+.custom-table tbody tr:hover {
+    background: #eef2ff;
+}
+
+.custom-table img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-update {
+    background: #2563eb;
+    color: #fff;
+}
+
+.btn-update:hover {
+    background: #1d4ed8;
+}
+
+.btn-delete {
+    background: #dc2626;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #b91c1c;
+}
+
+.social-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.social-link:hover {
+    text-decoration: underline;
+}
+</style>
+
+ 
+    <div class="table-wrap">
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Address</th>
+                <th>DOB</th>
+                <th>Profile Image</th>
+                <th>BG Image</th>
+                <th>Facebook</th>
+                <th>LinkedIn</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in user_data %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.mobile }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.dob }}</td>
+                <td><img src="/{{ user.profile_image}}"></td>
+                <td><img src="/{{ user.bg_image}}"></td>
+                <td><a href="{{ user.facebook }}" class="social-link" target="_blank">Facebook</a></td>
+                <td><a href="{{ user.linkedin }}" class="social-link" target="_blank">LinkedIn</a></td>
+                <td>
+                    <a href="#">
+                        <button class="btn btn-update">Update</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="#">
+                        <button class="btn btn-delete">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
     {% include 'admin_panel/footer.html' %} 

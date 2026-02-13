@@ -1,0 +1,31 @@
+{% include 'admin_panel/navbar.html' %}
+<table border="1" cellpadding="10" cellspacing="0" width="80%" style="margin: 10% 0px 25px 10%; text-align: center;">
+    <center><h2 style="margin: 0px;">Enquiries</h2></center>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>massage</th>
+            <th>Action</th>
+        </tr>
+
+        {% for e in enq_data %}
+        <tr>
+            <td>
+                {{ e.name }}
+            </td>
+            <td>{{ e.email }}</td>
+            <td>{{ e.mobile }}</td>
+            <td>{{ e.massage }}</td>
+            <td>
+                    <a href="#">
+                        <button class="btn btn-update">Update</button>
+                    </a>&nbsp;
+                    <a href="#">
+                        <button class="btn btn-delete">Delete</button>
+                    </a>
+                </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% include 'admin_panel/footer.html' %}

@@ -747,13 +747,9 @@ button {
     border-bottom-left-radius: 5px;
 }
 
-.blog_img {
-    width: 100%;
-    background-image: url(../images/blog-img1.png);
-    height: auto;
-    background-size: 100%;
-    background-repeat: no-repeat;
-}
+/* .blog_img {
+    
+} */
 
 .blog_img_2 {
     width: 100%;

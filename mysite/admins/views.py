@@ -27,9 +27,14 @@ def save_user(req):
             linkedin = req.POST.get('linkedin')
         )
         save_user.save()
-    return redirect("/profile"),
+    return redirect("/profile")
+
 def services(req):
-    return render(req, "admin_panel/services.html")
+    service_data = models.Service.objects.all()
+    obj = {
+        "service_data":service_data
+    }
+    return render(req, "admin_panel/services.html",obj)
 def save_services(req):
     if req.method == 'POST':
         save_services =models.Service(
@@ -38,5 +43,48 @@ def save_services(req):
         )
         save_services.save()
         messages.success(req, "Service saved")
-        return redirect("/services/")
+        return redirect("/services")
 
+def project(req):
+    project_data = models.project.objects.all()
+    obj = {
+        "project_data":project_data
+    }
+    return render(req, "admin_panel/project.html",obj)
+
+def save_project(req):
+    if req.method == 'POST':
+        project_data = models.project(
+            project_name = req.POST.get('project_name'),
+            project_image = req.FILES.get('project_image'),
+            project_desc = req.POST.get('project_desc'),
+            project_link = req.POST.get('project_link'),
+            project_duration = req.POST.get('project_duration')
+        )
+        project_data.save()
+        return redirect('/project')
+    
+def blogs(req):
+    blog_data = models.blog.objects.all()
+    obj = {
+        "blog_data":blog_data
+    }
+    return render(req,"admin_panel/blog.html",obj)
+
+def save_blog(req):
+    if req.method == "POST":
+        blog_data = models.blog(
+           blog_date = req.POST.get('blog_date'),
+           blog_image = req.FILES.get('blog_image'),
+           blog_title = req.POST.get('blog_title'),
+           blog_description = req.POST.get('blog_description')
+        )
+        blog_data.save()
+        return redirect('/blogs')
+    
+def enquiry(req):
+    enq_data = models.enq.objects.all()
+    obj = {
+        'enq_data':enq_data
+    }
+    return render(req, "admin_panel/enq.html",obj)

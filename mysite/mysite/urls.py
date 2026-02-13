@@ -28,10 +28,16 @@ urlpatterns = [
     path('service/', users.service),
     path('blog/', users.blog),
     path('contact/', users.contact),
+    path('save_enq/', users.save_enq),
 
     path('save_user/', adminp.save_user),
     path('admin/', adminp.home),
     path('profile/', adminp.profile),  
     path('services/',adminp.services),
-    path('save_services/',adminp.save_services) 
+    path('save_services/',adminp.save_services) ,
+    path('project/',adminp.project),
+    path('save_project/',adminp.save_project),
+    path('blogs/', adminp.blogs),
+    path('save_blog/', adminp.save_blog),
+    path('enquiry/', adminp.enquiry)
 ]
