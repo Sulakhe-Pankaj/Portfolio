@@ -98,15 +98,15 @@
         {% for s in service_data %}
         <tr>
             <td>
-                <img src="{{ s.service_image}}" width="50">
+                <img src="/{{ s.service_image}}" width="50">
             </td>
             <td>{{ s.service_title }}</td>
             <td>
-                    <a href="#">
-                        <button class="btn btn-update">Update</button>
+                    <a href="#"  style="text-decoration: none;">
+                        <button class="btn btn-update" style="background-color: orange; color:white;">Update</button>
                     </a>&nbsp;
-                    <a href="#">
-                        <button class="btn btn-delete">Delete</button>
+                    <a href="{% url 'delete_service' s.id %}" style="text-decoration-line: none;">
+                        <button class="btn btn-delete" onclick="return confirm('are you sure')" style="background-color: rgb(229, 56, 56); color:white;">Delete</button>
                     </a>
                 </td>
         </tr>

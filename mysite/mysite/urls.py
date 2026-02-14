@@ -39,5 +39,6 @@ urlpatterns = [
     path('save_project/',adminp.save_project),
     path('blogs/', adminp.blogs),
     path('save_blog/', adminp.save_blog),
-    path('enquiry/', adminp.enquiry)
+    path('enquiry/', adminp.enquiry),
+    path('delete_service/<int:id>/',adminp.delete_service, name="delete_service")
 ]

@@ -88,3 +88,11 @@ def enquiry(req):
         'enq_data':enq_data
     }
     return render(req, "admin_panel/enq.html",obj)
+
+def delete_service(req, id):
+     qs =  models.Service.objects.filter(id=id)
+     if qs.exists():
+         qs.delete()
+         return HttpResponse('data delete successfully')
+     else:
+         return HttpResponse('No data found', status=404)
