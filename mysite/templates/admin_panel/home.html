@@ -1,2 +1,151 @@
-{% include 'admin_panel/navbar.html' %}
+{% include 'admin_panel/header.html' %}
+<!--  ======================================= Blog ===================================== -->
+
+<div class="table-wrap">
+    <center><h2>Home</h2></center>
+    <table border="1" cellpadding="10" cellspacing="0" width="90%"
+        style="margin: 50px 0px 25px 50px; text-align: center;">
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        {% for b in blog_data %}
+        <tr>
+            <td><img src="/{{ b.blog_image}}" width="50"></td>
+            <td>{{ b.blog_date }}</td>
+            <td>{{ b.blog_title }}</td>
+            <td>{{ b.blog_description }}</td>
+            <td>
+                <a href="{% url 'update_blog' b.id %}" style="text-decoration: none;">
+                    <button class="btn btn-update" style="color: whitesmoke;background-color: orange;width: 80px;">Update</button>
+                </a>
+                <a href="{% url 'delete_blog' b.id %}" style="text-decoration: none;">
+                    <button class="btn btn-delete" style="color: whitesmoke;background-color: brown;width: 80px;" onclick="return confirm('Are you sure?')">Delete</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+<!-- =============================== =================================== -->
+
+
+
+<div class="table-wrap">
+    <center><h2>Profile</h2></center>
+    <table class="custom-table" border="1" cellpadding="10" cellspacing="0" width="90%"
+        style="margin: 50px 0px 25px 50px; text-align: center;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Address</th>
+                <th>DOB</th>
+                <th>Profile Image</th>
+                <th>BG Image</th>
+                <th>Facebook</th>
+                <th>LinkedIn</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in user_data %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.mobile }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.dob }}</td>
+                <td><img src="/{{ user.profile_image}}" width="50"></td>
+                <td><img src="/{{ user.bg_image}}" width="50"></td>
+                <td><a href="{{ user.facebook }}" target="_blank">Facebook</a></td>
+                <td><a href="{{ user.linkedin }}" target="_blank">LinkedIn</a></td>
+                <td>
+                    <a href="{% url 'update_profile' user.id %}" style="text-decoration: none;">
+                        <button class="btn btn-update" style="color: whitesmoke;background-color: orange;width: 80px;">Update</button>
+                    </a> <br>
+                    <br>
+                    <a href="{% url 'delete_profile' user.id %}" style="text-decoration: none;">
+                        <button class="btn btn-delete" style="color: whitesmoke;background-color: brown;width: 80px; " onclick="return confirm('Are you sure?')">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+<!-- ============================================= ======================================= -->
+
+<div class="table-wrap">
+    <center><h2>Project</h2></center>
+    <table border="1" cellpadding="10" cellspacing="0" width="90%"
+        style="margin: 50px 0px 25px 50px; text-align: center;">
+        <tr>
+            <th>Project Image</th>
+            <th>Project Name</th>
+            <th>Project Description</th>
+            <th>Project Link</th>
+            <th>Project Duration</th>
+            <th>Action</th>
+        </tr>
+
+        {% for p in project_data %}
+        <tr>
+            <td><img src="/{{ p.project_image }}" width="50"></td>
+            <td>{{ p.project_name }}</td>
+            <td>{{ p.project_desc }}</td>
+            <td><a href="{{ p.project_link }}" target="_blank">View</a></td>
+            <td>{{ p.project_duration }}</td>
+            <td>
+                <a href="{% url 'update_project' p.id %}" style="text-decoration: none;">
+                    <button class="btn btn-update" style="color: whitesmoke;background-color: orange;width: 80px;">Update</button>
+                </a>
+                <a href="{% url 'delete_project' p.id %}" style="text-decoration: none;">
+                    <button class="btn btn-delete" style="color: whitesmoke;background-color: brown;width: 80px;" onclick="return confirm('Are you sure?')">Delete</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+<!-- =======================================   ===================================== -->
+
+<div class="table-wrap">
+    <center><h2>Service</h2></center>
+    <table border="1" cellpadding="10" cellspacing="0" width="90%"
+        style="margin: 50px 0px 25px 50px; text-align: center;">
+        <tr>
+            <th>Service Image</th>
+            <th>Service Title</th>
+            <th>Action</th>
+        </tr>
+
+        {% for s in service_data %}
+        <tr>
+            <td><img src="/{{ s.service_image }}" width="50"></td>
+            <td>{{ s.service_title }}</td>
+            <td>
+                <a href="{% url 'update_service' s.id %}" style="text-decoration: none;">
+                    <button class="btn btn-update" style="color: whitesmoke;background-color: orange;width: 80px;">Update</button>
+                </a>
+                <a href="{% url 'delete_service' s.id %}" style="text-decoration: none;">
+                    <button class="btn btn-delete" style="color: whitesmoke;background-color: brown;width: 80px;">Delete</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
 {% include 'admin_panel/footer.html' %}

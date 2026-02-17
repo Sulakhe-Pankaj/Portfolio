@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Profile</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #222;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #0066ff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #0066ff;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #004bcc;
+        }
+
+        .up_image {
+            margin: 35px 10px 0px 150px ;
+        }
+    </style>
+</head>
+
+<body>
+    {%include 'admin_panel/navbar.html'%}
+
+    <div class="form-container">
+        <h2>Add New Service</h2>
+
+        <form  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Service Image</label>
+                <input type="file" name="service_image">
+            <div class="up_image">
+                <img src="/{{ services.service_image }}" alt=" update image" width="200px">
+            </div>
+            </div>
+
+            <div class="form-group">
+                <label>Service Title</label>
+                <input type="text" name="service_title" value="{{ services.service_title }}" placeholder="Title">
+            </div>
+
+            <button type="submit" class="submit-btn">Save Service</button>
+        </form>
+    </div>
+{%include 'admin_panel/footer.html'%}

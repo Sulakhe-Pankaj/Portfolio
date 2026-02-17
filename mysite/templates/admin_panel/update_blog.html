@@ -1,0 +1,82 @@
+{% include 'admin_panel/navbar.html' %}
+<style>
+    .container {
+        width: auto;
+        padding-top: 100px;
+        margin: 0px auto;
+        /* overflow: auto; */
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .blog-form {
+        max-width: 75%;
+        margin: 0px auto 40px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        font-family: Arial, sans-serif;
+    }
+
+    .blog-form button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        border: none;
+        background: #2563eb;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .blog-form button:hover {
+        background: #1e40af;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 8px;
+    }
+
+</style>
+<div class="container">
+    <h2>Add Blog</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="blog-form">
+    {%csrf_token%}
+
+        <div class="form-group">
+            <label>Blog Date</label>
+            <input type="date" name="blog_date" value="{{blog.blog_date|date:'Y-m-d'}}" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Blog Image</label>
+            <input type="file" name="blog_image" class="form-control">
+            <img src="/{{ blog.blog_image }}" alt="blog_image" width="80px">
+        </div>
+
+        <div class="form-group">
+            <label>Blog Title</label>
+            <input type="text" name="blog_title" value="{{blog.blog_title}}" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Blog Description</label>
+            <textarea name="blog_description" rows="5" class="form-control">{{blog.blog_description}}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Blog</button>
+    </form>
+</div>
+{% include 'admin_panel/footer.html' %}

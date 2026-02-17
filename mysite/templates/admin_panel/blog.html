@@ -1,100 +1,97 @@
-{% include 'admin_panel/navbar.html' %}
-<style>
-    .container {
-        width: auto;
-        padding-top: 100px;
-        margin: 0px auto;
-        /* overflow: auto; */
-    }
+<!DOCTYPE html>
+<html>
 
-    .form-group {
-        margin-bottom: 16px;
-    }
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Profile</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="/static/assets/css/ready.css">
+    <link rel="stylesheet" href="/static/assets/css/demo.css">
+    <style>
+        .container {
+            width: auto;
+            padding-top: 100px;
+            margin: 0px auto;
+            /* overflow: auto; */
+        }
 
-    .container h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+        .form-group {
+            margin-bottom: 16px;
+        }
 
-    .blog-form {
-        max-width: 75%;
-        margin: 0px auto 40px auto;
-        padding: 20px;
-        border-radius: 10px;
-        background: #fff;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        font-family: Arial, sans-serif;
-    }
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .blog-form button {
-        width: 100%;
-        padding: 10px;
-        margin-top: 15px;
-        border: none;
-        background: #2563eb;
-        color: #fff;
-        font-size: 16px;
-        border-radius: 6px;
-        cursor: pointer;
-    }
+        .blog-form {
+            max-width: 75%;
+            margin: 0px auto 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            font-family: Arial, sans-serif;
+        }
 
-    .blog-form button:hover {
-        background: #1e40af;
-    }
+        .blog-form button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            background: #2563eb;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-    input,
-    textarea {
-        width: 100%;
-        padding: 8px;
-    }
+        .blog-form button:hover {
+            background: #1e40af;
+        }
 
-</style>
-<div class="container">
-    <h2>Add Blog</h2>
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+        }
+    </style>
+</head>
 
-    <form method="POST" action="/save_blog/" enctype="multipart/form-data" class="blog-form">
-        {% csrf_token %}
+<body>
+    {%include 'admin_panel/navbar.html'%}
+    <div class="container">
+        <h2>Add Blog</h2>
 
-        <div class="form-group">
-            <label>Blog Date</label>
-            <input type="date" name="blog_date" class="form-control">
-        </div>
+        <form method="POST" action="/save_blog/" enctype="multipart/form-data" class="blog-form">
+            {% csrf_token %}
 
-        <div class="form-group">
-            <label>Blog Image</label>
-            <input type="file" name="blog_image" class="form-control">
-        </div>
+            <div class="form-group">
+                <label>Blog Date</label>
+                <input type="date" name="blog_date" class="form-control">
+            </div>
 
-        <div class="form-group">
-            <label>Blog Title</label>
-            <input type="text" name="blog_title" class="form-control">
-        </div>
+            <div class="form-group">
+                <label>Blog Image</label>
+                <input type="file" name="blog_image" class="form-control">
+            </div>
 
-        <div class="form-group">
-            <label>Blog Description</label>
-            <textarea name="blog_description" rows="5" class="form-control"></textarea>
-        </div>
+            <div class="form-group">
+                <label>Blog Title</label>
+                <input type="text" name="blog_title" class="form-control">
+            </div>
 
-        <button type="submit" class="btn btn-primary">Save Blog</button>
-    </form>
-</div>
+            <div class="form-group">
+                <label>Blog Description</label>
+                <textarea name="blog_description" rows="5" class="form-control"></textarea>
+            </div>
 
-<table border="1" cellpadding="10" cellspacing="0" width="80%" style="margin: 10% 0px 25px 10%; text-align: center;">
-    <tr>
-        <th>Blog Image</th>
-        <th>Blog Date</th>
-        <th>Blog Title</th>
-        <th>Blog Description</th>
-        <th>Action</th>
-    </tr> {% for b in blog_data %} <tr>
-        <td> <img src="/{{ b.blog_image}}" width="50"> </td>
-        <td>{{ b.blog_date }}</td>
-        <td>{{ b.blog_title }}</td>
-        <td>{{ b.blog_description }}</td>
-        <td> <a href="#"> <button class="btn btn-update"  style="color: white;background-color: #f1841e;height: 30px;border: none;align-items: center;">Update</button> </a>&nbsp; <a href="#"> <button
-                    class="btn btn-delete"  style="color: white;background-color: #f05024;height: 30px;border: none;align-items: center;">Delete</button> </a> </td>
-    </tr> {% endfor %}
-</table>
+            <button type="submit" class="btn btn-primary">Save Blog</button>
+        </form>
+    </div>
 
-
-{% include 'admin_panel/footer.html' %}
+    {% include 'admin_panel/footer.html' %}

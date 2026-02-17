@@ -9,7 +9,7 @@ class profile(models.Model):
      address = models.CharField(max_length=500)
      dob = models.DateTimeField()
      profile_image = models.ImageField(upload_to='static/asset')
-     bg_image = models.ImageField(upload_to="static/asset/", null=True, blank=True)
+     bg_image = models.ImageField(upload_to="static/asset/")
      facebook = models.URLField(max_length=300)
      linkedin = models.URLField(max_length=300)
 

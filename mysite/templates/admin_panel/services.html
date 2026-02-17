@@ -3,51 +3,78 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Profile</title>
+    <title>Services</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
-    <style>
-        .form-container {
-            max-width: 600px;
-            margin: 60px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            font-family: Arial, sans-serif;
-        }
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="/static/assets/css/ready.css">
+    <link rel="stylesheet" href="/static/assets/css/demo.css">
+    </head>
 
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #222;
-        }
+<body>
+    
+{% include 'admin_panel/navbar.html' %}
+<div style="
+    max-width: 600px;
+    margin: 60px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+">
+    <h2 style="
+        text-align: center;
+        margin-bottom: 25px;
+        color: #222;
+    ">
+        Add New Service
+    </h2>
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+    <form action="/save_services/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
 
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            color: #333;
-        }
+        <div style="margin-bottom: 18px;">
+            <label style="
+                display: block;
+                margin-bottom: 6px;
+                font-weight: 600;
+                color: #333;
+            ">
+                Service Image
+            </label>
+            <input type="file" name="service_image" style="
+                width: 100%;
+                padding: 10px 12px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 14px;
+                outline: none;
+            ">
+        </div>
 
-        .form-group input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-            outline: none;
-        }
+        <div style="margin-bottom: 18px;">
+            <label style="
+                display: block;
+                margin-bottom: 6px;
+                font-weight: 600;
+                color: #333;
+            ">
+                Service Title
+            </label>
+            <input type="text" name="service_title" placeholder="Title" style="
+                width: 100%;
+                padding: 10px 12px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 14px;
+                outline: none;
+            ">
+        </div>
 
-        .form-group input:focus {
-            border-color: #0066ff;
-        }
-
-        .submit-btn {
+        <button type="submit" style="
             width: 100%;
             padding: 12px;
             border: none;
@@ -57,61 +84,10 @@
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
-            transition: 0.2s;
-        }
+        ">
+            Save Service
+        </button>
+    </form>
+</div>
 
-        .submit-btn:hover {
-            background: #004bcc;
-        }
-    </style>
-</head>
-
-<body>
-    {%include 'admin_panel/navbar.html'%}
-
-    <div class="form-container">
-        <h2>Add New Service</h2>
-
-        <form action="/save_services/" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            <div class="form-group">
-                <label>Service Image</label>
-                <input type="file" name="service_image">
-            </div>
-
-            <div class="form-group">
-                <label>Service Title</label>
-                <input type="text" name="service_title" placeholder="Title">
-            </div>
-
-            <button type="submit" class="submit-btn">Save Service</button>
-        </form>
-    </div>
-    <table border="1" cellpadding="10" cellspacing="0" width="80%" style="margin: 10% 0px 25px 10%; text-align: center;">
-        <tr>
-            <th>Service Image</th>
-            <th>Service Title</th>
-            <th>Action</th>
-        </tr>
-
-        {% for s in service_data %}
-        <tr>
-            <td>
-                <img src="/{{ s.service_image}}" width="50">
-            </td>
-            <td>{{ s.service_title }}</td>
-            <td>
-                    <a href="#"  style="text-decoration: none;">
-                        <button class="btn btn-update" style="background-color: orange; color:white;">Update</button>
-                    </a>&nbsp;
-                    <a href="{% url 'delete_service' s.id %}" style="text-decoration-line: none;">
-                        <button class="btn btn-delete" onclick="return confirm('are you sure')" style="background-color: rgb(229, 56, 56); color:white;">Delete</button>
-                    </a>
-                </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-
-    {% include 'admin_panel/footer.html' %}
+{% include 'admin_panel/footer.html' %}

@@ -32,6 +32,8 @@ urlpatterns = [
 
     path('save_user/', adminp.save_user),
     path('admin/', adminp.home),
+    path('login/',adminp.login, name='login'),
+    path('logout/',adminp.logout, name='logout'),
     path('profile/', adminp.profile),  
     path('services/',adminp.services),
     path('save_services/',adminp.save_services) ,
@@ -40,5 +42,13 @@ urlpatterns = [
     path('blogs/', adminp.blogs),
     path('save_blog/', adminp.save_blog),
     path('enquiry/', adminp.enquiry),
-    path('delete_service/<int:id>/',adminp.delete_service, name="delete_service")
+    path('delete_service/<int:id>/',adminp.delete_service, name="delete_service"),
+    path('delete_profile/<int:id>/',adminp.delete_profile, name="delete_profile"),
+    path('delete_blog/<int:id>/',adminp.delete_blog, name="delete_blog"),
+    path('delete_project/<int:id>/',adminp.delete_project, name="delete_project"),
+    path('update_service/<int:id>/',adminp.update_service, name="update_service"),
+    path('update_profile/<int:id>/',adminp.update_profile, name="update_profile"),
+    path('update_project/<int:id>/',adminp.update_project, name="update_project"),
+    path('update_blog/<int:id>/',adminp.update_blog, name="update_blog")
+
 ]
