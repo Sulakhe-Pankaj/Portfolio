@@ -11,41 +11,31 @@
          </div>
          <div class="blog_section_2">
             <div class="container">
-               <div class="row">
-                  <div class="col-md-4">
-                     <div class="blog_box">
-                        <div class="blog_img">
-                           <h4 class="date_text">Jun 05</h4>
-                           <h4 class="prep_text">Veniam, quis nostrud </h4>
-                        </div>
-                        <p class="lorem_text">elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
+              <div class="row">
+
+               {% for i in blog_data %}
+               <div class="col-md-4">
+                  <div class="blog_box">
+                     <div class="blog_img" style="
+                        width: 100%;
+                        background-image: url(/{{i.blog_image}});
+                        height: auto;
+                        background-size: 100%;
+                        background-repeat: no-repeat;">
+                        <h4 class="date_text">{{ i.blog_date}}</h4>
+                        <h4 class="prep_text">{{i.blog_title}}</h4>
                      </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="blog_box">
-                        <div class="blog_img_2">
-                           <h4 class="date_text">Jun 05</h4>
-                           <h4 class="prep_text">Veniam, quis nostrud </h4>
-                        </div>
-                        <p class="lorem_text">elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="blog_box">
-                        <div class="blog_box_3">
-                           <div class="blog_img">
-                              <h4 class="date_text">Jun 05</h4>
-                              <h4 class="prep_text">Veniam, quis nostrud </h4>
-                           </div>
-                           <p class="lorem_text">elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
-                        </div>
-                     </div>
+                     <p class="lorem_text">{{i.blog_description}}</p>
+                     <span><center><a href="{% url 'update_blog_user' i.id %}" style="font-size: 15px;font-weight:bold;color:rgb(24, 135, 83);">Update</a><b style="font-size: large;color: black;"> | </b><a href="{% url 'delete_blog_user' i.id %}" style="font-size: 15px;font-weight:bold;color:rgb(227, 47, 19);" onclick="return confirm('Are you sure to delete this blog')">Delete</a> </center></span>
                   </div>
                </div>
-               <div class="readmore_bt_1"><a href="#">Read More</a></div>
+               {% endfor %}
+            </div>
+               <div class="readmore_bt_1"><a href="/blogs">Add More</a></div>
             </div>
          </div>
       </div>
+      
       <!-- blog section end -->
       <!-- footer section start -->
       <div class="footer_section margin_top90" >

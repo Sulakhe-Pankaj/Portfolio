@@ -6,53 +6,29 @@
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
-                  <h1 class="portfolio_taital">My <span class="portfolio_taital_1">Portfolio</span></h1>
+                  <h1 class="portfolio_taital">My <span class="portfolio_taital_1">Projects</span></h1>
                </div>
             </div>
             <div class="portfolio_section">
                <div class="portfolio_section_2">
                   <div class="row">
-                     <div class="col-md-8">
+                     {% for p in project_data%}
+                     <div class="col-md-4">
                         <div class="container_main">
-                           <img src="/static/images/img-1.png" alt="" class="image">
+                           <img src="/{{ p.project_image }}" alt="project_image" class="image">
                            <div class="overlay">
                               <div class="text">
                                  <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">See More</a></div>
+                                    <div class="buy_bt"><a href="#">Details</a></div><br><br>
+                                    <div class="buy_bt"><a href="{%url 'delete_project_user' p.id%}" onclick="return confirm('You want to delete your project')">Delete</a></div><br><br>
+                                    <div class="buy_bt"><a href="{%url 'update_project_user' p.id%}">Update</a></div>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="/static/images/img-2.png" alt="" class="image">
-                           <div class="overlay">
-                              <div class="text">
-                                 <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">See More</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="portfolio_section_2">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="/static/images/img-3.png" alt="" class="image">
-                           <div class="overlay">
-                              <div class="text">
-                                 <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">See More</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
+                     {% endfor%}
+                     <!-- <div class="col-md-4">
                         <div class="container_main">
                            <img src="/static/images/img-4.png" alt="" class="image">
                            <div class="overlay">
@@ -75,11 +51,11 @@
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </div> -->
                   </div>
                </div>
             </div>
-            <div class="seemore_bt"><a href="#">See More</a></div>
+            <div class="seemore_bt"><a href="/project">Add More</a></div>
          </div>
       </div>
       <!-- portfolio section end -->

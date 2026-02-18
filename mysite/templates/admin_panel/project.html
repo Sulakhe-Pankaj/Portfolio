@@ -85,7 +85,7 @@
     <div class="form-container">
         <h2>Add New Project</h2>
 
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" action="/save_project/">
             {% csrf_token %}
 
             <div class="form-group">

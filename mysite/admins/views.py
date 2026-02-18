@@ -119,14 +119,42 @@ def enquiry(req):
     }
     return render(req, "admin_panel/enq.html",obj)
 
+# ======================== delete section =========================
+
 def delete_service(req, id):
      services_data =  models.Service.objects.filter(id=id)
      if services_data.exists():
          services_data.delete()
-         return HttpResponse('data delete successfully')
      else:
-         return redirect('/admin')
+         return HttpResponse('data is not found')
+     return redirect('/admin')
 
+def delete_profile(req, id):
+     user_data =  models.profile.objects.filter(id=id)
+     if user_data.exists():
+         user_data.delete()
+     else:
+         return HttpResponse('data is not found')
+     return redirect('/admin')
+     
+def delete_project(req, id):
+     project_data =  models.project.objects.filter(id=id)
+     if project_data.exists():
+         project_data.delete()
+     else:
+         return HttpResponse('data is not found')
+     return redirect('/admin')
+     
+def delete_blog(req, id):
+     blog_data =  models.blog.objects.filter(id=id)
+     if blog_data.exists():
+         blog_data.delete()
+     else:
+         return HttpResponse('data is not found')
+     return redirect('/admin')
+     
+#  ================================= update section ============================
+     
 def update_service(req,id):
     services_data = models.Service.objects.get(id = id)
     if req.method == 'POST':
@@ -157,22 +185,6 @@ def update_profile(req,id):
         user_data.save()
         return redirect('/admin')
     return render(req, 'admin_panel/update_profile.html',{'user':user_data})
-
-def delete_profile(req, id):
-     user_data =  models.profile.objects.filter(id=id)
-     if user_data.exists():
-         user_data.delete()
-         return HttpResponse('data delete successfully')
-     else:
-         return redirect('/admin')
-     
-def delete_project(req, id):
-     project_data =  models.project.objects.filter(id=id)
-     if project_data.exists():
-         project_data.delete()
-         return HttpResponse('data delete successfully')
-     else:
-         return redirect('/admin')
      
 def update_project(req,id):
     project_data = models.project.objects.get(id=id)
@@ -203,13 +215,5 @@ def update_blog(req,id):
         blog_data.save()
         return redirect('/admin')
     return render(req,'admin_panel/update_blog.html',{'blog':blog_data})
-
-def delete_blog(req, id):
-     blog_data =  models.blog.objects.filter(id=id)
-     if blog_data.exists():
-         blog_data.delete()
-         return HttpResponse('data delete successfully')
-     else:
-         return redirect('/admin')
     
 

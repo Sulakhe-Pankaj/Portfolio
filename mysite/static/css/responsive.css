@@ -7,6 +7,11 @@
     .header-search {
         padding: 15px 0px;
     }
+
+    .header_section {
+        background-size: cover;
+        background: #252f2d!important;
+    }
 }
 
 
@@ -15,6 +20,11 @@
 @media only screen and (min-width: 599px) and (max-width: 767px) {
     .logo {
         text-align: center;
+    }
+
+    .header_section {
+        background-size: cover;
+        background: #252f2d!important;
     }
     .cart-content-right {
         padding-bottom: 5px;
@@ -125,6 +135,7 @@
     .mean-container .mean-nav ul li a.mean-expand {
         top: 0;
     }
+    
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {

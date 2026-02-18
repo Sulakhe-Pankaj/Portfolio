@@ -23,7 +23,7 @@
 @import url(animate.min.css);
 @import url(normalize.css);
 @import url(icomoon.css);
-@import url(css/font-awesome.min.css);
+@import url(font-awesome.min.css);
 @import url(meanmenu.css);
 @import url(owl.carousel.min.css);
 @import url(swiper.min.css);
@@ -482,6 +482,7 @@ button {
 
 .services_taital {
     width: 100%;
+    text-align: center;
     float: left;
     font-size: 40px;
     color: #f5c729;
@@ -495,6 +496,22 @@ button {
     font-weight: bold;
     padding: 20px 0px 0px 0px;
     text-align: center;
+}
+
+.delete_service { 
+    font-size: large;
+    position: absolute;
+    left: 43%;
+    top: 80%;
+    bottom: 10%;
+}
+
+.update_service { 
+    font-size: 18px;
+    position: absolute;
+    left: 53%;
+    top: 80%;
+    bottom: 10%;
 }
 
 .services_section_2 {
@@ -513,15 +530,21 @@ button {
 }
 
 .app_icon {
-    width: 100%;
+    width: 100px;
+    height: 80px;
     margin: 0 auto;
     text-align: center;
     align-items: center;
     justify-content: center;
 }
+.app_icon img {
+ border: 2px solid black;
+ border-radius: 100%;
+}
 
 .app_icon_1 {
-    width: 100%;
+    width: 80px;
+    height: 80px;
     margin: 0 auto;
     text-align: center;
     align-items: center;
@@ -537,13 +560,13 @@ button {
     color: #f5c729;
 }
 
-.box_main:hover .app_icon_1 {
+/* .box_main:hover .app_icon_1 {
     display: block;
 }
 
 .box_main:hover .app_icon {
     display: none;
-}
+} */
 
 .readmore_bt {
     width: 170px;

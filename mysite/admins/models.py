@@ -33,7 +33,7 @@ class blog(models.Model):
 class enq(models.Model):
      name = models.TextField(max_length=300)
      email = models.TextField(max_length=300)
-     mobile = models.IntegerField(max_length=20)
+     mobile = models.IntegerField()
      massage = models.TextField(max_length=300)
 
 

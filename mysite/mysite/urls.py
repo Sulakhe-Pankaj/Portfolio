@@ -22,6 +22,7 @@ from admins import views as adminp
 
 urlpatterns = [
     path('', users.home),
+    path('add/',users.add),
     path('home/', users.home),
     path('portfolio/', users.portfolio),
     path('about/', users.about),
@@ -49,6 +50,15 @@ urlpatterns = [
     path('update_service/<int:id>/',adminp.update_service, name="update_service"),
     path('update_profile/<int:id>/',adminp.update_profile, name="update_profile"),
     path('update_project/<int:id>/',adminp.update_project, name="update_project"),
-    path('update_blog/<int:id>/',adminp.update_blog, name="update_blog")
+    path('update_blog/<int:id>/',adminp.update_blog, name="update_blog"),
+
+    path('delete_service_user/<int:id>/',users.delete_service_user, name="delete_service_user"),
+    path('delete_profile_user/<int:id>/',users.delete_profile_user, name="delete_profile_user"),
+    path('delete_blog_user/<int:id>/',users.delete_blog_user, name="delete_blog_user"),
+    path('delete_project_user/<int:id>/',users.delete_project_user, name="delete_project_user"),
+    path('update_service_user/<int:id>/',users.update_service_user, name="update_service_user"),
+    path('update_profile_user/<int:id>/',users.update_profile_user, name="update_profile_user"),
+    path('update_project_user/<int:id>/',users.update_project_user, name="update_project_user"),
+    path('update_blog_user/<int:id>/',users.update_blog_user, name="update_blog_user")
 
 ]
