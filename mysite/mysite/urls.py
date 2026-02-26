@@ -59,6 +59,8 @@ urlpatterns = [
     path('update_service_user/<int:id>/',users.update_service_user, name="update_service_user"),
     path('update_profile_user/<int:id>/',users.update_profile_user, name="update_profile_user"),
     path('update_project_user/<int:id>/',users.update_project_user, name="update_project_user"),
-    path('update_blog_user/<int:id>/',users.update_blog_user, name="update_blog_user")
+    path('add_project_user/',users.add_project_user, name="add_project_user"),
+    path('update_blog_user/<int:id>/',users.update_blog_user, name="update_blog_user"),
+    path('switch_profile/<int:id>/',adminp.switch_profile, name="switch_profile")
 
 ]

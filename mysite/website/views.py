@@ -5,12 +5,14 @@ from django.contrib import messages
 
 # Create your views here.
 def home(req):
-    user_data = models.profile.objects.all() 
+    user_data = models.profile.objects.filter(is_active=True)
+    all_profiles = models.profile.objects.all()
     service_data = models.Service.objects.all() 
     project_data = models.project.objects.all() 
     blog_data = models.blog.objects.all() 
     obj =  {
         'user_data':user_data,
+        'all_profiles':all_profiles,
         'service_data':service_data,
         'project_data':project_data,
         'blog_data':blog_data
@@ -18,12 +20,14 @@ def home(req):
     return render (req,'user/index.html',obj)
     
 def about(req):
-    user_data = models.profile.objects.all() 
+    user_data = models.profile.objects.filter(is_active=True)
+    all_profiles = models.profile.objects.all()
     service_data = models.Service.objects.all() 
     project_data = models.project.objects.all() 
     blog_data = models.blog.objects.all() 
     obj =  {
         'user_data':user_data,
+        'all_profiles':all_profiles,
         'service_data':service_data,
         'project_data':project_data,
         'blog_data':blog_data
@@ -31,12 +35,14 @@ def about(req):
     return render (req,'user/about.html',obj)
     
 def contact(req):
-    user_data = models.profile.objects.all() 
+    user_data = models.profile.objects.filter(is_active=True)
+    all_profiles = models.profile.objects.all()
     service_data = models.Service.objects.all() 
     project_data = models.project.objects.all() 
     blog_data = models.blog.objects.all() 
     obj =  {
         'user_data':user_data,
+        'all_profiles':all_profiles,
         'service_data':service_data,
         'project_data':project_data,
         'blog_data':blog_data
@@ -44,12 +50,14 @@ def contact(req):
     return render (req,'user/contact.html',obj)
     
 def portfolio(req):
-    user_data = models.profile.objects.all() 
+    user_data = models.profile.objects.filter(is_active=True)
+    all_profiles = models.profile.objects.all()
     service_data = models.Service.objects.all() 
     project_data = models.project.objects.all() 
     blog_data = models.blog.objects.all() 
     obj =  {
         'user_data':user_data,
+        'all_profiles':all_profiles,
         'service_data':service_data,
         'project_data':project_data,
         'blog_data':blog_data
@@ -57,12 +65,14 @@ def portfolio(req):
     return render (req,'user/portfolio.html',obj)
     
 def blog(req):
-    user_data = models.profile.objects.all() 
+    user_data = models.profile.objects.filter(is_active=True)
+    all_profiles = models.profile.objects.all()
     service_data = models.Service.objects.all() 
     project_data = models.project.objects.all() 
     blog_data = models.blog.objects.all() 
     obj =  {
         'user_data':user_data,
+        'all_profiles':all_profiles,
         'service_data':service_data,
         'project_data':project_data,
         'blog_data':blog_data
@@ -70,12 +80,14 @@ def blog(req):
     return render (req,'user/blog.html',obj)
     
 def service(req):
-    user_data = models.profile.objects.all() 
+    user_data = models.profile.objects.filter(is_active=True)
+    all_profiles = models.profile.objects.all()
     service_data = models.Service.objects.all() 
     project_data = models.project.objects.all() 
     blog_data = models.blog.objects.all() 
     obj =  {
         'user_data':user_data,
+        'all_profiles':all_profiles,
         'service_data':service_data,
         'project_data':project_data,
         'blog_data':blog_data
@@ -146,16 +158,17 @@ def update_profile_user(req,id):
     if req.method == 'POST':
         user_data.name = req.POST.get('name')
         user_data.password = req.POST.get('password')
-        user_data.mail = req.POST.get('mail')
+        user_data.email = req.POST.get('email')
         user_data.mobile = req.POST.get('mobile')
         user_data.address = req.POST.get('address')
-        user_data.bod = req.POST.get('bod')
-        user_data.bod = req.POST.get('bod')
+        user_data.dob = req.POST.get('dob')
         user_data.facebook = req.POST.get('facebook')
         user_data.linkedin = req.POST.get('linkedin')
 
         if req.FILES.get('profile_image'):
             user_data.profile_image = req.FILES.get('profile_image')
+            
+        if req.FILES.get('bg_image'):
             user_data.bg_image = req.FILES.get('bg_image')
 
         user_data.save()
@@ -192,6 +205,24 @@ def update_blog_user(req,id):
         return redirect('/blog')
     return render(req,'admin_panel/update_blog.html',{'blog':blog_data})
 
+
+def add_project_user(req):
+    user_data = models.profile.objects.filter(is_active=True)
+    
+    if req.method == 'POST':
+        project_data = models.project(
+            project_name = req.POST.get('project_name'),
+            project_image = req.FILES.get('project_image'),
+            project_desc = req.POST.get('project_desc'),
+            project_link = req.POST.get('project_link'),
+            project_duration = req.POST.get('project_duration')
+        )
+        project_data.save()
+        messages.success(req, "Project added successfully")
+        return redirect('/portfolio')
+    
+    obj = {'user_data': user_data}
+    return render(req, 'user/add_project.html', obj)
 
 def add(req):
     return render (req,'user/add.py')

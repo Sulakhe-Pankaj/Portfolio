@@ -1,313 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Admin Page</title>
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-		name='viewport' />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard</title>
+	<!-- Use local bootstrap if available or fallback -->
 	<link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
-	<link rel="stylesheet"
-		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-	<link rel="stylesheet" href="/static/assets/css/ready.css">
-	<link rel="stylesheet" href="/static/assets/css/demo.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="/static/css/premium.css">
+	<style>
+		/* Small overrides for admin panel specifically if needed */
+		.admin-table {
+			color: var(--text-muted);
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 10px;
+			margin-top: 20px;
+		}
+
+		.admin-table th {
+			color: var(--text-light);
+			font-weight: 500;
+			padding: 15px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+			text-transform: uppercase;
+			font-size: 0.8rem;
+			letter-spacing: 1px;
+		}
+
+		.admin-table td {
+			padding: 15px;
+			background: rgba(255, 255, 255, 0.02);
+			vertical-align: middle;
+		}
+
+		.admin-table tr td:first-child {
+			border-top-left-radius: 8px;
+			border-bottom-left-radius: 8px;
+		}
+
+		.admin-table tr td:last-child {
+			border-top-right-radius: 8px;
+			border-bottom-right-radius: 8px;
+		}
+
+		.admin-table tr:hover td {
+			background: rgba(255, 255, 255, 0.04);
+		}
+
+		.admin-icon-btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 35px;
+			height: 35px;
+			border-radius: 8px;
+			color: var(--text-muted);
+			background: rgba(255, 255, 255, 0.05);
+			transition: all 0.3s;
+			margin: 0 5px;
+		}
+
+		.admin-icon-btn:hover {
+			color: #fff;
+			transform: translateY(-2px);
+		}
+
+		.admin-icon-btn.edit:hover {
+			background: #f59e0b;
+		}
+
+		.admin-icon-btn.delete:hover {
+			background: #ef4444;
+		}
+	</style>
 </head>
 
-<body>
-	<div class="main-header">
-				<div class="logo-header">
-					<a href="index.html" class="logo">
-						Ready Dashboard
-					</a>
-					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
-						data-target="collapse" aria-controls="sidebar" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
-				</div>
-				<nav class="navbar navbar-header navbar-expand-lg">
-					<div class="container-fluid">
-						<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-							<li class="nav-item dropdown">
-								<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
-									aria-expanded="false">
-                                    {% for user in user_data %}
-									 <img src="/{{user.profile_image}}" alt="user-img"
-										width="36" height="36" class="img-circle"><span>Pofile</span></span> </a>
-								<ul class="dropdown-menu dropdown-user">
-									<li>
-										<div class="user-box">
-										
-											<div class="u-img"><img src="/{{user.profile_image}}" alt="user">
-											</div>
-											<div class="u-text">
-												<h4>{{user.name}}</h4>
-												<p class="text-muted">{{user.email}}</p>
-                                                <a href="#" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
-											</div>
-										</div>
-									</li>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
-									<a class="dropdown-item" href="#"></i> My Balance</a>
-									<a class="dropdown-item" href="#"><i class="ti-email"></i> Inbox</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="ti-settings"></i> Account Setting</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="/logout/"><i class="fa fa-power-off"></i>Logout</a>
-                                    
-								</ul>
-								<!-- /.dropdown-user -->
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-	<div class="wrapper">
-		<div class="sidebar">
-			<div class="scrollbar-inner sidebar-wrapper">
-				<div class="user">
-					<div class="photo">
-						<img src="/{{user.profile_image}}">
-					</div>
-					<div class="info">
-						<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-							<span>
-								{{user.name}}
-								<span class="user-level">Administrator</span>
-								<span class="caret"></span>
-							</span>
-						</a>
-						<div class="clearfix"></div>
+<body style="background-color: var(--bg-dark);">
 
-						<div class="collapse in" id="collapseExample" aria-expanded="true">
-							<ul class="nav">
-								<li>
-									<a href="#profile">
-										<span class="link-collapse">My Profile</span>
-									</a>
-								</li>
-								<li>
-									<a href="#edit">
-										<span class="link-collapse">Edit Profile</span>
-									</a>
-								</li>
-								<li>
-									<a href="#settings">
-										<span class="link-collapse">Settings</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-                {% endfor %}
-				<ul class="nav">
-					<li class="nav-item active">
-						<a href="/admin/">
-							<i class="la la-dashboard"></i>
-							<p>Dashboard</p>
-							<!-- <span class="badge badge-count">5</span> -->
-						</a>
-					</li>
-					<li class="nav-item active">
-						<a href="/profile">
-							<i class="la la-dashboard"></i>
-							<p>Profile</p>
-							<!-- <span class="badge badge-count">5</span> -->
-						</a>
-					</li>
-					<li class="nav-item active">
-						<a href="/services">
-							<i class="la la-dashboard"></i>
-							<p>Service</p>
-							<!-- <span class="badge badge-count">5</span> -->
-						</a>
-					</li>
-					<li class="nav-item active">
-						<a href="/project">
-							<i class="la la-dashboard"></i>
-							<p>Projects</p>
-							<!-- <span class="badge badge-count">5</span> -->
-						</a>
-					</li>
-					<li class="nav-item active">
-						<a href="/blogs">
-							<i class="la la-dashboard"></i>
-							<p>Blogs</p>
-							<!-- <span class="badge badge-count">5</span> -->
-						</a>
-					</li>
-					<li class="nav-item active">
-						<a href="/enquiry">
-							<i class="la la-dashboard"></i>
-							<p>Enquiry</p>
-							<!-- <span class="badge badge-count">5</span> -->
-						</a>
-					</li>
+	<!-- Minimal Admin Navbar -->
+	<nav class="navbar navbar-expand-lg premium-nav fixed-top">
+		<div class="container">
+			<a class="navbar-brand text-white font-weight-bold" href="/admin/">
+				Admin <span style="color: var(--primary-color);">Panel</span>
+			</a>
+			<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#adminNavbar">
+				<i class="fa fa-bars text-white"></i>
+			</button>
+
+			<div class="collapse navbar-collapse" id="adminNavbar">
+				<ul class="navbar-nav mx-auto">
+					<li class="nav-item"><a class="nav-link text-white mx-3" href="/admin/">Dashboard</a></li>
+					<li class="nav-item"><a class="nav-link text-white mx-3" href="/profile/">Profile</a></li>
+					<li class="nav-item"><a class="nav-link text-white mx-3" href="/services/">Services</a></li>
+					<li class="nav-item"><a class="nav-link text-white mx-3" href="/project/">Projects</a></li>
+					<li class="nav-item"><a class="nav-link text-white mx-3" href="/blogs/">Blogs</a></li>
+					<li class="nav-item"><a class="nav-link text-white mx-3" href="/enquiry/">Inquiries</a></li>
 				</ul>
+				<div class="d-flex align-items-center">
+					<a href="/home/" class="btn-outline-premium btn-sm mr-3" target="_blank"><i
+							class="fa fa-external-link-alt mr-1"></i> Site</a>
+					<a href="/logout/" class="btn-danger-outline btn-sm" style="padding: 5px 15px;"><i
+							class="fa fa-power-off"></i></a>
+				</div>
 			</div>
 		</div>
-		<div class="main-panel">
-			<div class="content">
-				<div class="container-fluid">
-					<h4 class="page-title">Dashboard</h4>
-					<div class="row">
-						<div class="col-md-3">
-							<div class="card card-stats card-warning">
-								<div class="card-body ">
-									<div class="row">
-										<div class="col-5">
-											<div class="icon-big text-center">
-												<i class="la la-users"></i>
-											</div>
-										</div>
-										<div class="col-7 d-flex align-items-center">
-											<div class="numbers">
-												<p class="card-category">Visitors</p>
-												<h4 class="card-title">1,294</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="card card-stats card-success">
-								<div class="card-body ">
-									<div class="row">
-										<div class="col-5">
-											<div class="icon-big text-center">
-												<i class="la la-bar-chart"></i>
-											</div>
-										</div>
-										<div class="col-7 d-flex align-items-center">
-											<div class="numbers">
-												<p class="card-category">Sales</p>
-												<h4 class="card-title">$ 1,345</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="card card-stats card-danger">
-								<div class="card-body">
-									<div class="row">
-										<div class="col-5">
-											<div class="icon-big text-center">
-												<i class="la la-newspaper-o"></i>
-											</div>
-										</div>
-										<div class="col-7 d-flex align-items-center">
-											<div class="numbers">
-												<p class="card-category">Subscribers</p>
-												<h4 class="card-title">1303</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="card card-stats card-primary">
-								<div class="card-body ">
-									<div class="row">
-										<div class="col-5">
-											<div class="icon-big text-center">
-												<i class="la la-check-circle"></i>
-											</div>
-										</div>
-										<div class="col-7 d-flex align-items-center">
-											<div class="numbers">
-												<p class="card-category">Order</p>
-												<h4 class="card-title">576</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- 							<div class="col-md-3">
-								<div class="card card-stats">
-									<div class="card-body ">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center icon-warning">
-													<i class="la la-pie-chart text-warning"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Number</p>
-													<h4 class="card-title">150GB</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card card-stats">
-									<div class="card-body ">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-bar-chart text-success"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Revenue</p>
-													<h4 class="card-title">$ 1,345</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card card-stats">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-times-circle-o text-danger"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Errors</p>
-													<h4 class="card-title">23</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card card-stats">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-5">
-												<div class="icon-big text-center">
-													<i class="la la-heart-o text-primary"></i>
-												</div>
-											</div>
-											<div class="col-7 d-flex align-items-center">
-												<div class="numbers">
-													<p class="card-category">Followers</p>
-													<h4 class="card-title">+45K</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div> -->
-					</div>
+	</nav>
 
-				</div>
-			</div>
-			
+	<!-- Main Wrapper -->
+	<div class="section-padding" style="margin-top: 80px; min-height: 85vh;">
+		<div class="container">

@@ -1,105 +1,51 @@
-{% include 'admin_panel/navbar.html' %}
-
-<style>
-    .form-container {
-        max-width: 700px;
-        margin: 60px auto;
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        font-family: Arial, sans-serif;
-    }
-
-    .form-container h2 {
-        text-align: center;
-        margin-bottom: 25px;
-        color: #222;
-    }
-
-    .form-group {
-        margin-bottom: 18px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: 600;
-        color: #333;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 14px;
-        outline: none;
-    }
-
-    .form-group textarea {
-        resize: vertical;
-        min-height: 80px;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-        border-color: #0066ff;
-    }
-
-    .submit-btn {
-        width: 100%;
-        padding: 12px;
-        border: none;
-        background: #2563eb;
-        color: #fff;
-        font-size: 16px;
-        font-weight: 600;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .submit-btn:hover {
-        background: #1e40af;
-    }
-</style>
-
-<div class="form-container">
-    <h2>Update Project</h2>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <div class="form-group">
-            <label>Project Name</label>
-            <input type="text" name="project_name" value="{{ project.project_name }}" placeholder="Enter project name">
+{% include 'admin_panel/header.html' %}
+<div class="section-padding" style="margin-top: 80px; min-height: 85vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="premium-card p-5">
+                    <h3 class="text-white mb-4 text-center">Update <span
+                            style="color: var(--primary-color);">Project</span>
+                    </h3>
+                    <form method="post" enctype="multipart/form-data" class="premium-form text-left">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-4">
+                                <label class="text-white mb-2">Project Name</label>
+                                <input type="text" name="project_name" class="form-control"
+                                    value="{{ project.project_name }}" required>
+                            </div>
+                            <div class="col-md-6 form-group mb-4">
+                                <label class="text-white mb-2">Project Image</label>
+                                <div class="form-control d-flex align-items-center mb-2"><input type="file"
+                                        name="project_image" style="color:var(--text-muted); font-size:0.9rem;"></div>
+                                {% if project.project_image %}<img src="/{{ project.project_image }}" width="80"
+                                    style="border-radius: 8px;">{% endif %}
+                            </div>
+                            <div class="col-md-6 form-group mb-4">
+                                <label class="text-white mb-2">Project Link</label>
+                                <input type="url" name="project_link" class="form-control"
+                                    value="{{project.project_link}}" required>
+                            </div>
+                            <div class="col-md-6 form-group mb-4">
+                                <label class="text-white mb-2">Duration</label>
+                                <input type="text" name="project_duration" class="form-control"
+                                    value="{{project.project_duration}}" required>
+                            </div>
+                            <div class="col-12 form-group mb-4">
+                                <label class="text-white mb-2">Description</label>
+                                <textarea class="form-control" name="project_desc" rows="4"
+                                    required>{{ project.project_desc }}</textarea>
+                            </div>
+                            <div class="col-12 text-center mt-3 d-flex justify-content-between">
+                                <a href="/admin/" class="btn-outline-premium">Cancel</a>
+                                <button type="submit" class="btn-premium px-5">Update Project</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label>Project Image</label>
-            <input type="file" name="project_image">
-            <img src="/{{ project.project_image }}" alt="project_image" width="80px">
-        </div>
-
-        <div class="form-group">
-            <label>Description</label>
-            <textarea name="project_desc" placeholder="Enter project description" required>{{ project.project_desc }}</textarea>
-        </div>
-
-        <div class="form-group">
-            <label>Project Link</label>
-            <input type="url" name="project_link" value="{{project.project_link}}" placeholder="https://example.com" required>
-        </div>
-
-        <div class="form-group">
-            <label>Duration</label>
-            <input type="text" name="project_duration" value="{{project.project_duration}}" placeholder="e.g. 2 months / Jan 2025 - Mar 2025" required>
-        </div>
-
-        <button type="submit" class="submit-btn">Save Project</button>
-    </form>
+    </div>
 </div>
-
 {% include 'admin_panel/footer.html' %}

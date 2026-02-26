@@ -1,469 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
+{% include 'user/navbar.html' %}
 
-<head>
-   <!-- basic -->
-   <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!-- mobile metas -->
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-   <!-- site metas -->
-   <title>Home</title>
-   <meta name="keywords" content="">
-   <meta name="description" content="">
-   <meta name="author" content="">
-   <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-   <link rel="stylesheet" href="/static/css/style.css">
-   <link rel="stylesheet" href="/static/css/responsive.css">
+<!-- Hero Section -->
+{% for i in user_data %}
+<div class="hero-section layout_padding">
+   <div class="hero-bg-glow"></div>
+   <div class="container">
+      <div class="row align-items-center">
+         <div class="col-lg-6 mb-5 mb-lg-0">
+            <p class="text-uppercase" style="letter-spacing: 2px; color: var(--primary-color); font-weight: 600;">Hello
+               I'm</p>
+            <h1 class="hero-title">{{ i.name }}<span>.</span></h1>
+            <p class="hero-subtitle">
+               A developer focused on building clean, responsive and practical web applications. Crafting digital
+               experiences with modern tools and passion.
+            </p>
 
-   <link rel="icon" href="/static/images/fevicon.png">
+            <div class="d-flex align-items-center mt-4">
+               <a href="/portfolio/" class="btn-premium mr-4">View My Work</a>
 
-   <link rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.min.css">
-
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <!-- ======================== ====================== -->
-   <link rel="stylesheet" href="/static/css/ready.css">
-
-</head>
-
-<body>
-   <!-- header section start -->
-   {% for i in user_data %}
-   <div class="header_section" style="width: 100%;
-    float: left;
-    background: #252f2d!important;
-    height: auto;">
-      <div class="container">
-         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="logo">
-               <a href="#"><img src="/static/images/logo.png"></a>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                     <a class="nav-link" href="/home/">Home</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="/about/">About</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="/portfolio/">Portfolio</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="/service/">Service</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="/blog/">Blog</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="/contact/">Contact</a>
-                  </li>
-
-                  <li class="nav-item">
-
-
-                     <nav class="navbar navbar-header navbar-expand-lg">
-                        <div class="container-fluid">
-                           <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-                              <li class="nav-item dropdown">
-                                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
-                                    aria-expanded="false">
-                                    <img src="/{{i.profile_image}}" alt="user-img" width="40" height="40"
-                                       class="img-circle">
-                                       <!-- <span>PROFILE</span> -->
-                                    </a>
-                                 <ul class="dropdown-menu dropdown-user">
-                                    <li>
-                                       <div class="user-box">
-
-                                          <div class="u-img"><img src="/{{i.profile_image}}" alt="user">
-                                          </div>
-                                          <div class="u-text">
-                                             <h4>{{i.name}}</h4>
-                                             <p class="text-muted">{{i.email}}</p><a href="#"
-                                                class="btn btn-rounded btn-danger btn-sm">View Profile</a>
-                                          </div>
-                                       </div>
-                                    </li>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
-                                    <a class="dropdown-item" href="#"></i> My Balance</a>
-                                    <a class="dropdown-item" href="#"><i class="ti-email"></i> Inbox</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"><i class="ti-settings"></i>Account Setting</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item"href="#"><i class="fa fa-power-off"></i>&nbsp;Logout</a>
-                                 </ul>
-                                 <!-- /.dropdown-user -->
-                              </li>
-                           </ul>
-                        </div>
-                     </nav>
-
-                     
-                  </li>
-
-
-               </ul>
-            </div>
-         </nav>
-      </div>
-      <!-- banner section start -->
-      <div class="banner_section layout_padding">
-         <section class="slide-wrapper">
-            <div class="container-fluid">
-               <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                     <li data-target="#myCarousel" data-slide-to="1"></li>
-                     <li data-target="#myCarousel" data-slide-to="2"></li>
-                     <li data-target="#myCarousel" data-slide-to="3"></li>
-                  </ol>
-                  <div class="carousel-inner">
-                     <div class="carousel-item active">
-                        <div class="container-fluid">
-                           <div class="row">
-                              <div class="col-md-6">
-                                 <div class="banner_taital_main">
-                                    <h3 class="banner_text">Hello Am, <br>{{ i.name }}</h3>
-                                    <!-- <h1 class="banner_taital">UI/UX Designer</h1> -->
-                                 </div>
-                              </div>
-                              <div class="col-md-6">
-                                 <div class="social_icon">
-                                    <ul>
-                                       <li><a href="{{ i.facebook}}"><i class="fa fa-facebook"
-                                                aria-hidden="true"></i></a></li>
-                                       <!-- <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> -->
-                                       <li><a href="{{ i.linkedin}}"><i class="fa fa-linkedin"
-                                                aria-hidden="true"></i></a></li>
-                                       <!-- <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> -->
-                                    </ul>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     {% endfor %}
-
-
-                     <!-- <div class="carousel-item">
-                           <div class="container-fluid">
-                              <div class="row">
-                                 <div class="col-md-6">
-                                    <div class="banner_taital_main">
-                                       <h3 class="banner_text">Hello Am <br>Joy Seno</h3>
-                                       <h1 class="banner_taital">UI/UX Designer</h1>
-                                    </div>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <div class="social_icon">
-                                       <ul>
-                                          <li><a href="#"><i class="fa fa-facebook" aria-hidden="true" style="color: black;"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-twitter" aria-hidden="true" style="color: black;"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true" style="color: black;"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-instagram" aria-hidden="true" style="color: black;"></i></a></li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="container-fluid">
-                              <div class="row">
-                                 <div class="col-md-6">
-                                    <div class="banner_taital_main">
-                                       <h3 class="banner_text">Hello Am <br>Joy Seno</h3>
-                                       <h1 class="banner_taital">UI/UX Designer</h1>
-                                    </div>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <div class="social_icon">
-                                       <ul>
-                                          <li><a href="#"><i class="fa fa-facebook" aria-hidden="true" style="color: black;"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-twitter" aria-hidden="true" style="color: black;"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true" style="color: black;"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-instagram" aria-hidden="true" style="color: black;"></i></a></li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="container-fluid">
-                              <div class="row">
-                                 <div class="col-md-6">
-                                    <div class="banner_taital_main">
-                                       <h3 class="banner_text">Hello Am <br>Joy Seno</h3>
-                                       <h1 class="banner_taital">UI/UX Designer</h1>
-                                    </div>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <div class="social_icon">
-                                       <ul>
-                                          <li><a href="#"><i class="fa fa-facebook" aria-hidden="true" style="color: black;"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-twitter" aria-hidden="true" style="color: black;"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true" style="color: black;"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-instagram" aria-hidden="true" style="color: black;"></i></a></li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div> -->
-                  </div>
-               </div>
-         </section>
-         <div class="container">
-            <div class="video_bt">
-               <div class="play_icon"><img src="/static/images/play-icon.png"></div>
-            </div>
-         </div>
-      </div>
-      <!-- banner section end -->
-   </div>
-   <!-- header section end -->
-   <!-- services section start -->
-   <div class="services_section layout_padding">
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-12">
-               <h1 class="services_taital">My <span class="portfolio_taital_1">Services</span></h1>
-            </div>
-         </div>
-      </div>
-      <div class="container">
-         <div class="services_section_2">
-            <div class="row">
-               {% for s in service_data %}
-               <div class="col-lg-3 col-sm-6">
-                  <div class="box_main ">
-
-                     <div class="app_icon" style="
-                                               width: 80px;
-                                               height: 80px;
-                                               margin: 0 auto;
-                                               background-image: url(/{{s.service_image}});
-                                               background-size:cover;
-                                               border-radius: 100%;
-                                               text-align: center;
-                                               align-items: center;
-                                               justify-content: center;">
-                        <!-- <img src="/{{s.service_image}}"> -->
-                     </div>
-                     <div class="app_icon_1" style="
-                                               width: 75px;
-                                               height: 80px;
-                                               margin: 0 auto;
-                                               background-image: url(/{{s.service_image}});
-                                               background-size:cover;
-                                               border-radius: 100%;
-                                               text-align: center;
-                                               align-items: center;
-                                               justify-content: center;">
-                        <!-- <img src="/{{s.service_image}}"> -->
-                     </div>
-                     <h4 class="services_text">{{s.service_title}}</h4>
-
-                  </div>
-               </div>
-               {% endfor %}
-            </div>
-            <div class="readmore_bt"><a href="#">Read More</a></div>
-         </div>
-      </div>
-   </div>
-   <!-- services section end -->
-   <!-- portfolio section start -->
-   <div class="portfolio_section layout_padding">
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-12">
-               <h1 class="portfolio_taital">My <span class="portfolio_taital_1">Projects</span></h1>
-            </div>
-         </div>
-         <div class="portfolio_section">
-            <div class="portfolio_section_2">
-               <div class="row">
-
-                  {% for i in project_data %}
-
-                  <div class="col-md-4">
-                     <div class="container_main">
-                        <img src="/{{ i.project_image}}" alt="" class="image">
-                        <div class="overlay">
-                           <div class="text">
-                              <div class="btn_main">
-                                 <div class="buy_bt"><a href="/{{ i.project_link}}">See More</a></div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  {% endfor %}
-
+               <div class="social-icons-premium">
+                  {% if i.facebook %}
+                  <a href="{{ i.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                  {% endif %}
+                  {% if i.linkedin %}
+                  <a href="{{ i.linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+                  {% endif %}
+                  <a href="https://github.com/Sulakhe-Pankaj/" target="_blank"><i class="fa fa-github"></i></a>
                </div>
             </div>
          </div>
-         <div class="seemore_bt"><a href="#">See More</a></div>
-      </div>
-   </div>
-   <!-- portfolio section end -->
-   <!-- blog section start -->
-   <div class="blog_section layout_padding">
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-12">
-               <h1 class="blog_taital">My <span class="blog_taital_1">Blog</span></h1>
-               <p class="blog_text">upidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum."</p>
-            </div>
-         </div>
-      </div>
-      <div class="blog_section_2">
-         <div class="container">
-            <div class="row">
-
-               {% for i in blog_data %}
-               <div class="col-md-4">
-                  <div class="blog_box">
-                     <div class="blog_img" style="
-                        width: 100%;
-                        background-image: url(/{{i.blog_image}});
-                        height: auto;
-                        background-size: 100%;
-                        background-repeat: no-repeat;">
-                        <h4 class="date_text">{{ i.blog_date}}</h4>
-                        <h4 class="prep_text">{{i.blog_title}}</h4>
-                     </div>
-                     <p class="lorem_text">{{i.blog_description}}</p>
-                  </div>
+         <div class="col-lg-6 text-center position-relative">
+            <div style="position: relative; display: inline-block;">
+               <div
+                  style="position: absolute; width: 100%; height: 100%; border: 2px solid var(--primary-color); border-radius: 30px; transform: translate(20px, 20px); z-index: -1;">
                </div>
-               {% endfor %}
-
+               <img src="/{{ i.profile_image }}" alt="{{ i.name }}" class="img-fluid"
+                  style="border-radius: 30px; max-height: 500px; object-fit: cover; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
             </div>
          </div>
-         <div class="readmore_bt_1"><a href="#">Read More</a></div>
       </div>
    </div>
+</div>
+{% empty %}
+<div class="hero-section layout_padding">
+   <div class="hero-bg-glow"></div>
+   <div class="container text-center">
+      <h1 class="hero-title">Welcome to Premium Portfolio<span>.</span></h1>
+      <p class="hero-subtitle mx-auto">Your portfolio is currently empty. Get started by creating your administrator
+         profile.</p>
+      <a href="/profile/" class="btn-premium btn-lg mt-3" style="padding: 15px 40px; font-size: 1.1rem;"><i
+            class="fa fa-user-plus mr-2"></i> Create Profile</a>
    </div>
+</div>
+{% endfor %}
 
-   <!-- blog section end -->
-   <!-- contact section start -->
-   <div class="contact_section layout_padding">
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-12">
-               <h1 class="contact_taital">My <span class="contact_taital_1">Contact</span></h1>
+<!-- Services Section -->
+<div class="section-padding" style="background: rgba(255,255,255,0.01);">
+   <div class="container">
+      <h2 class="section-title">My <span>Expertise</span></h2>
+      <div class="row">
+         {% for s in service_data %}
+         <div class="col-lg-4 col-md-6 mb-4">
+            <div class="premium-card">
+               <div class="service-icon"
+                  style="background-image: url('/{{s.service_image}}'); background-color: transparent;">
+                  <!-- Icon loaded from bg image -->
+               </div>
+               <h4 class="text-white">{{ s.service_title }}</h4>
+               <p class="text-muted mb-0">Delivering high-quality solutions for your business needs using modern
+                  technologies.</p>
             </div>
          </div>
-         <div class="contact_section_2">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="mail_section_1">
+         {% empty %}
+         <div class="col-12 text-center text-muted">No services added yet.</div>
+         {% endfor %}
+      </div>
+      {% if service_data %}
+      <div class="text-center mt-4">
+         <a href="/service/" class="btn-outline-premium">All Services <i class="fa fa-arrow-right ml-2"></i></a>
+      </div>
+      {% endif %}
+   </div>
+</div>
 
-                     <form action="/save_enq/" method="post">
-                        {% csrf_token%}
-                        <input type="text" class="mail_text" placeholder="Your Name" name="name">
-                        <input type="text" class="mail_text" placeholder="Your Email" name="email">
-                        <input type="number" class="mail_text" placeholder="Your Phone" name="mobile" required min="10">
-                        <textarea class="massage-bt" placeholder="Your Massage" rows="5" id="comment"
-                           name="massage"></textarea>
-                        <button type="submit" class="send_bt"
-                           style="height: 30px; background-color: blue;color: whitesmoke;border-radius: 5px;width: 75px;">Send
-                           </button">
-                     </form>
-
-                  </div>
+<!-- Projects Section -->
+<div class="section-padding">
+   <div class="container">
+      <h2 class="section-title">Selected <span>Work</span></h2>
+      <div class="row">
+         {% for p in project_data|slice:":3" %}
+         <div class="col-lg-4 col-md-6 mb-4">
+            <div class="project-card">
+               <img src="/{{ p.project_image }}" alt="{{ p.project_name }}" class="project-img">
+               <div class="project-overlay">
+                  <a href="/{{ p.project_link }}" class="btn-premium btn-sm"
+                     style="padding: 8px 20px; font-size: 0.9rem;">Live Demo</a>
                </div>
             </div>
          </div>
+         {% empty %}
+         <div class="col-12 text-center text-muted">No projects added yet.</div>
+         {% endfor %}
       </div>
-   </div>
-   <!-- contact section end -->
-   <!-- project box section start -->
-   <div class="project_box">
-      <div class="container">
-         <div class="project_main">
-            <h1 class="hire_text">Hire me for your projects</h1>
-            <div class="callnow_bt"><a type="number" href="#">Call Now</a></div>
-         </div>
+      {% if project_data %}
+      <div class="text-center mt-5">
+         <a href="/portfolio/" class="btn-outline-premium">View Full Portfolio</a>
       </div>
+      {% endif %}
    </div>
-   <!-- project box section end -->
-   <!-- footer section start -->
-   <div class="footer_section">
-      <div class="container">
-         <div class="location_text">
-            <ul>
-               <li>
-                  <a href="https://www.google.com/maps/place/Nashik" target="_blank"><i class="fa fa-map-marker"
-                        aria-hidden="true"></i></a>
-               </li>
-               <li>
-                  <a href="www.linkedin.com/in/pankaj-sulakhe" target="_blank"><i class="fa fa-linkedin"
-                        aria-hidden="true"></i></a>
-               </li>
-               <li>
-                  <a href="https://github.com/Sulakhe-Pankaj/" target="_blank"><i class="fa fa-github"
-                        aria-hidden="true"></i></a>
-               </li>
-            </ul>
-         </div>
-      </div>
+</div>
+
+<!-- Contact CTA -->
+<div class="section-padding"
+   style="background: linear-gradient(180deg, rgba(13,14,21,1) 0%, rgba(99,102,241,0.05) 100%); border-top: 1px solid var(--card-border);">
+   <div class="container text-center">
+      <h2 class="mb-4" style="font-size: 2.5rem;">Let's work <span>together</span></h2>
+      <p class="text-muted mb-5 max-w-2xl mx-auto" style="max-width: 600px;">
+         Have a project in mind? Looking to partner or work together? Reach out through the form and I'll get back to
+         you within 24 hours.
+      </p>
+      <a href="/contact/" class="btn-premium btn-lg" style="padding: 15px 40px; font-size: 1.1rem;">Get In Touch</a>
    </div>
-   <!-- footer section end -->
-   <!-- copyright section start -->
-   <div class="copyright_section">
-      <div class="container">
-         <p class="copyright_text">2026 All Rights Reserved. Design by Pankaj</p>
-      </div>
-   </div>
-   <!-- copyright section end -->
-   <!-- Javascript files-->
-   <script src="/static/js/jquery.min.js"></script>
-   <script src="/static/js/popper.min.js"></script>
-   <script src="/static/js/bootstrap.bundle.min.js"></script>
-   <script src="/static/js/jquery-3.0.0.min.js"></script>
-   <script src="/static/js/plugin.js"></script>
-   <!-- sidebar -->
-   <script src="/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
-   <script src="/static/js/custom.js"></script>
-   <script>
-      $('#myCarousel').carousel({
-         interval: false
-      });
+</div>
 
-      //scroll slides on swipe for touch enabled devices
-
-      $("#myCarousel").on("touchstart", function (event) {
-
-         var yClick = event.originalEvent.touches[0].pageY;
-         $(this).one("touchmove", function (event) {
-
-            var yMove = event.originalEvent.touches[0].pageY;
-            if (Math.floor(yClick - yMove) > 1) {
-               $(".carousel").carousel('next');
-            }
-            else if (Math.floor(yClick - yMove) < -1) {
-               $(".carousel").carousel('prev');
-            }
-         });
-         $(".carousel").on("touchend", function () {
-            $(this).off("touchmove");
-         });
-      });
-   </script>
-</body>
-
-</html>
+{% include 'user/footer.html' %}

@@ -1,150 +1,212 @@
 {% include 'admin_panel/header.html' %}
-<!--  ======================================= Blog ===================================== -->
-<div class="table-wrap">
-    <center><h2>Home</h2></center>
-    <table border="1" cellpadding="10" cellspacing="0" width="90%"
-        style="margin: 50px 0px 25px 50px; text-align: center;">
-        <tr>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Action</th>
-        </tr>
-        {% for b in blog_data %}
-        <tr>
-            <td><img src="/{{ b.blog_image}}" width="50"></td>
-            <td>{{ b.blog_date }}</td>
-            <td>{{ b.blog_title }}</td>
-            <td>{{ b.blog_description }}</td>
-            <td>
-                <a href="{% url 'update_blog' b.id %}" style="text-decoration: none;">
-                    <button class="btn btn-update" style="color: whitesmoke;background-color: orange;width: 80px;">Update</button>
-                </a>
-                <a href="{% url 'delete_blog' b.id %}" style="text-decoration: none;">
-                    <button class="btn btn-delete" style="color: whitesmoke;background-color: brown;width: 80px;" onclick="return confirm('Are you sure?')">Delete</button>
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
 
-    </table>
+<div class="row mb-5">
+    <div class="col-12 text-center">
+        <h2 class="text-white mb-2">Admin <span style="color: var(--primary-color);">Dashboard</span></h2>
+        <p class="text-muted">Manage your premium portfolio content from this unified interface.</p>
+    </div>
 </div>
 
-<!-- =============================== =================================== -->
-
-
-
-<div class="table-wrap">
-    <center><h2>Profile</h2></center>
-    <table class="custom-table" border="1" cellpadding="10" cellspacing="0" width="90%"
-        style="margin: 50px 0px 25px 50px; text-align: center;">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Password</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th>Address</th>
-                <th>DOB</th>
-                <th>Profile Image</th>
-                <th>BG Image</th>
-                <th>Facebook</th>
-                <th>LinkedIn</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in user_data %}
-            <tr>
-                <td>{{ user.name }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.mobile }}</td>
-                <td>{{ user.address }}</td>
-                <td>{{ user.dob }}</td>
-                <td><img src="/{{ user.profile_image}}" width="50"></td>
-                <td><img src="/{{ user.bg_image}}" width="50"></td>
-                <td><a href="{{ user.facebook }}" target="_blank">Facebook</a></td>
-                <td><a href="{{ user.linkedin }}" target="_blank">LinkedIn</a></td>
-                <td>
-                    <a href="{% url 'update_profile' user.id %}" style="text-decoration: none;">
-                        <button class="btn btn-update" style="color: whitesmoke;background-color: orange;width: 80px;">Update</button>
-                    </a> <br>
-                    <br>
-                    <a href="{% url 'delete_profile' user.id %}" style="text-decoration: none;">
-                        <button class="btn btn-delete" style="color: whitesmoke;background-color: brown;width: 80px; " onclick="return confirm('Are you sure?')">Delete</button>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-
-        </tbody>
-    </table>
+<!-- ======================================= PROFILES ===================================== -->
+<div class="premium-card mb-5 p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="text-white m-0"><i class="fa fa-user-circle mr-2 text-muted"></i> User Profiles</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Contact</th>
+                    <th>Location / Social</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in user_data %}
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="/{{ user.profile_image }}" width="45" height="45"
+                                style="border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.1);"
+                                class="mr-3">
+                            <div>
+                                <h6 class="text-white mb-1" style="font-size: 0.95rem;">{{ user.name }}</h6>
+                                <small class="text-muted">DOB: {{ user.dob }}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-white mb-1" style="font-size: 0.9rem;"><i
+                                class="fa fa-envelope mr-2 text-muted"></i>{{ user.email }}</div>
+                        <small class="text-muted"><i class="fa fa-phone mr-2"></i>{{ user.mobile }}</small>
+                    </td>
+                    <td>
+                        <div class="text-white mb-1" style="font-size: 0.9rem;"><i
+                                class="fa fa-map-marker-alt mr-2 text-muted"></i>{{ user.address }}</div>
+                        <div class="mt-2">
+                            {% if user.facebook %}<a href="{{ user.facebook }}" class="text-muted mr-3 hover-white"
+                                target="_blank"><i class="fab fa-facebook"></i></a>{% endif %}
+                            {% if user.linkedin %}<a href="{{ user.linkedin }}" class="text-muted hover-white"
+                                target="_blank"><i class="fab fa-linkedin"></i></a>{% endif %}
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        {% if user.is_active %}
+                        <span
+                            style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; border: 1px solid rgba(16, 185, 129, 0.3);"
+                            class="mr-2">
+                            <i class="fa fa-check-circle mr-1"></i> Active
+                        </span>
+                        {% else %}
+                        <a href="{% url 'switch_profile' user.id %}" class="btn-outline-premium mr-2"
+                            style="padding: 5px 10px; font-size: 0.8rem;">Make Active</a>
+                        {% endif %}
+                        <a href="{% url 'update_profile' user.id %}" class="admin-icon-btn edit" title="Edit Profile"><i
+                                class="fa fa-pen"></i></a>
+                        <a href="{% url 'delete_profile' user.id %}" class="admin-icon-btn delete"
+                            title="Delete Profile" onclick="return confirm('Delete this profile permanently?')"><i
+                                class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<!-- ============================================= ======================================= -->
-
-<div class="table-wrap">
-    <center><h2>Project</h2></center>
-    <table border="1" cellpadding="10" cellspacing="0" width="90%"
-        style="margin: 50px 0px 25px 50px; text-align: center;">
-        <tr>
-            <th>Project Image</th>
-            <th>Project Name</th>
-            <th>Project Description</th>
-            <th>Project Link</th>
-            <th>Project Duration</th>
-            <th>Action</th>
-        </tr>
-
-        {% for p in project_data %}
-        <tr>
-            <td><img src="/{{ p.project_image }}" width="50"></td>
-            <td>{{ p.project_name }}</td>
-            <td>{{ p.project_desc }}</td>
-            <td><a href="{{ p.project_link }}" target="_blank">View</a></td>
-            <td>{{ p.project_duration }}</td>
-            <td>
-                <a href="{% url 'update_project' p.id %}" style="text-decoration: none;">
-                    <button class="btn btn-update" style="color: whitesmoke;background-color: orange;width: 80px;">Update</button>
-                </a>
-                <a href="{% url 'delete_project' p.id %}" style="text-decoration: none;">
-                    <button class="btn btn-delete" style="color: whitesmoke;background-color: brown;width: 80px;" onclick="return confirm('Are you sure?')">Delete</button>
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-
-    </table>
+<!-- ======================================= PROJECTS ===================================== -->
+<div class="premium-card mb-5 p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="text-white m-0"><i class="fa fa-briefcase mr-2 text-muted"></i> Portfolio Projects</h5>
+        <a href="/project/" class="btn-outline-premium btn-sm"><i class="fa fa-plus mr-1"></i> Add Project</a>
+    </div>
+    <div class="table-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Link & Duration</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in project_data %}
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="/{{ p.project_image }}" width="80" height="50"
+                                style="border-radius: 6px; object-fit: cover;" class="mr-3">
+                            <div>
+                                <h6 class="text-white mb-1" style="font-size: 0.95rem;">{{ p.project_name }}</h6>
+                                <p class="text-muted mb-0"
+                                    style="font-size: 0.8rem; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    {{ p.project_desc }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mb-1"><a href="{{ p.project_link }}" target="_blank" class="text-decoration-none"
+                                style="color: var(--primary-color); font-size: 0.9rem;"><i class="fa fa-link mr-1"></i>
+                                Live Link</a></div>
+                        <small class="text-muted"><i class="fa fa-clock mr-1"></i> {{ p.project_duration }}</small>
+                    </td>
+                    <td class="text-right">
+                        <a href="{% url 'update_project' p.id %}" class="admin-icon-btn edit" title="Edit Project"><i
+                                class="fa fa-pen"></i></a>
+                        <a href="{% url 'delete_project' p.id %}" class="admin-icon-btn delete" title="Delete Project"
+                            onclick="return confirm('Delete this project?')"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-<!-- =======================================   ===================================== -->
 
-<div class="table-wrap">
-    <center><h2>Service</h2></center>
-    <table border="1" cellpadding="10" cellspacing="0" width="90%"
-        style="margin: 50px 0px 25px 50px; text-align: center;">
-        <tr>
-            <th>Service Image</th>
-            <th>Service Title</th>
-            <th>Action</th>
-        </tr>
+<!-- ======================================= SERVICES ===================================== -->
+<div class="premium-card mb-5 p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="text-white m-0"><i class="fa fa-concierge-bell mr-2 text-muted"></i> Offered Services</h5>
+        <a href="/services/" class="btn-outline-premium btn-sm"><i class="fa fa-plus mr-1"></i> Add Service</a>
+    </div>
+    <div class="table-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Icon</th>
+                    <th>Service Name</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in service_data %}
+                <tr>
+                    <td style="width: 100px;">
+                        <img src="/{{ s.service_image }}" width="45" height="45"
+                            style="border-radius: 8px; background: rgba(255,255,255,0.05); padding: 5px;">
+                    </td>
+                    <td>
+                        <h6 class="text-white mb-0" style="font-size: 0.95rem;">{{ s.service_title }}</h6>
+                    </td>
+                    <td class="text-right">
+                        <a href="{% url 'update_service' s.id %}" class="admin-icon-btn edit" title="Edit Service"><i
+                                class="fa fa-pen"></i></a>
+                        <a href="{% url 'delete_service' s.id %}" class="admin-icon-btn delete" title="Delete Service"
+                            onclick="return confirm('Delete this service?')"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        {% for s in service_data %}
-        <tr>
-            <td><img src="/{{ s.service_image }}" width="50"></td>
-            <td>{{ s.service_title }}</td>
-            <td>
-                <a href="{% url 'update_service' s.id %}" style="text-decoration: none;">
-                    <button class="btn btn-update" style="color: whitesmoke;background-color: orange;width: 80px;">Update</button>
-                </a>
-                <a href="{% url 'delete_service' s.id %}" style="text-decoration: none;">
-                    <button class="btn btn-delete" style="color: whitesmoke;background-color: brown;width: 80px;">Delete</button>
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-
-    </table>
+<!-- ======================================= BLOGS ===================================== -->
+<div class="premium-card mb-5 p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="text-white m-0"><i class="fa fa-newspaper mr-2 text-muted"></i> Blog Posts</h5>
+        <a href="/blogs/" class="btn-outline-premium btn-sm"><i class="fa fa-plus mr-1"></i> Add Post</a>
+    </div>
+    <div class="table-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Post</th>
+                    <th>Date</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in blog_data %}
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="/{{ b.blog_image}}" width="80" height="50"
+                                style="border-radius: 6px; object-fit: cover;" class="mr-3">
+                            <div>
+                                <h6 class="text-white mb-1" style="font-size: 0.95rem;">{{ b.blog_title }}</h6>
+                                <p class="text-muted mb-0"
+                                    style="font-size: 0.8rem; max-width: 400px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    {{ b.blog_description }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="text-white" style="font-size: 0.85rem;"><i
+                                class="fa fa-calendar-alt mr-2 text-muted"></i>{{ b.blog_date }}</span>
+                    </td>
+                    <td class="text-right">
+                        <a href="{% url 'update_blog' b.id %}" class="admin-icon-btn edit" title="Edit Post"><i
+                                class="fa fa-pen"></i></a>
+                        <a href="{% url 'delete_blog' b.id %}" class="admin-icon-btn delete" title="Delete Post"
+                            onclick="return confirm('Delete this blog post?')"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 {% include 'admin_panel/footer.html' %}

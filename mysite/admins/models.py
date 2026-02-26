@@ -12,6 +12,7 @@ class profile(models.Model):
      bg_image = models.ImageField(upload_to="static/asset/")
      facebook = models.URLField(max_length=300)
      linkedin = models.URLField(max_length=300)
+     is_active = models.BooleanField(default=False)
 
 class Service(models.Model):
     service_image = models.ImageField(upload_to='static/asset')

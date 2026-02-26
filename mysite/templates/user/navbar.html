@@ -1,69 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <!-- basic -->
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- mobile metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <!-- site metas -->
-      <title>Home</title>
-      <meta name="keywords" content="">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <!-- bootstrap css -->
-      <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-      <!-- style css -->
-      <link rel="stylesheet" href="/static/css/style.css">
-      <!-- Responsive-->
-      <link rel="stylesheet" href="/static/css/responsive.css">
-      <!-- fevicon -->
-      <link rel="icon" href="/static/images/fevicon.png"  />
-      <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.min.css">
-      <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-      <!-- fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-      <!-- font awesome css -->
-      <link rel="stylesheet" href="/static/css/font-awesome.min.css">
-   </head>
-   <body>
-    <!-- header section start -->
-      <div class="header_section header_bg">
-         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <div class="logo" style="background-color: transparent;">
-               <a href="#"><img src="/static/images/logo1.png" style="width:55% ;height:70px;"></a>
-            </div>
-               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-               </button>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav ml-auto">
-                     <li class="nav-item">
-                        <a class="nav-link" href="/home/">Home</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/about/">About</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/portfolio/">Portfolio</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/service/">Service</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/blog/">Blog</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/contact/">Contact Us</a>
-                     </li>
-                  </ul>
-               </div>
-            </nav>
+
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Portfolio - Premium</title>
+
+   <!-- bootstrap css -->
+   <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+   <!-- Custom Premium CSS -->
+   <link rel="stylesheet" href="/static/css/premium.css">
+
+   <!-- font awesome css -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+   <!-- header section start -->
+   <nav class="navbar navbar-expand-lg premium-nav">
+      <div class="container">
+         <a class="navbar-brand" href="/home/">
+            <!-- <img src="/static/images/logo1.png" alt="Logo"> -->
+            <h4 style="margin:0; color:white; font-weight:700; letter-spacing:1px;">PORTFOLIO<span
+                  style="color:var(--primary-color);">.</span></h4>
+         </a>
+
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            style="border-color: rgba(255,255,255,0.1);">
+            <span class="fa fa-bars" style="color: white;"></span>
+         </button>
+
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto align-items-center">
+               <li class="nav-item">
+                  <a class="nav-link" href="/home/">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/about/">About</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/portfolio/">Portfolio</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/service/">Service</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/blog/">Blog</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/contact/">Contact</a>
+               </li>
+
+               <!-- Profile Dropdown -->
+               {% for i in user_data|slice:":1" %}
+               <li class="nav-item dropdown ml-3">
+                  <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown"
+                     role="button" data-toggle="dropdown" style="padding:0 !important;">
+                     <img src="/{{i.profile_image}}" class="nav-profile-img" alt="Profile">
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right"
+                     style="background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 12px; padding: 10px;">
+                     <div class="px-3 py-2 text-center border-bottom"
+                        style="border-color: var(--card-border) !important;">
+                        <img src="/{{i.profile_image}}" class="nav-profile-img mb-2" style="width:50px; height:50px;">
+                        <h6 class="mb-0 text-white">{{i.name}}</h6>
+                        <small class="text-muted">{{i.email}}</small>
+                     </div>
+
+                     {% if all_profiles|length > 1 %}
+                     <div class="px-3 py-2 border-bottom" style="border-color: var(--card-border) !important;">
+                        <small class="text-muted text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Switch
+                           Profile</small>
+                        {% for p in all_profiles %}
+                        {% if not p.is_active %}
+                        <a class="dropdown-item text-white mt-1 p-1 d-flex align-items-center"
+                           href="{% url 'switch_profile' p.id %}" style="transition:0.3s; border-radius: 6px;">
+                           <img src="/{{p.profile_image}}" class="nav-profile-img mr-2"
+                              style="width:25px; height:25px; border-width: 1px;">
+                           <span style="font-size: 0.85rem;">{{ p.name }}</span>
+                        </a>
+                        {% endif %}
+                        {% endfor %}
+                     </div>
+                     {% endif %}
+
+                     <a class="dropdown-item text-white mt-2" href="/admin/" style="transition:0.3s;"><i
+                           class="fa fa-user-shield mr-2 text-primary"></i> Admin Portal</a>
+                     <a class="dropdown-item text-white mt-2" href="{% url 'login' %}" style="transition:0.3s;"><i
+                           class="fa fa-sign-in mr-2"></i> Log In</a>
+                     <a class="dropdown-item text-danger" href="{% url 'logout' %}" style="transition:0.3s;"><i
+                           class="fa fa-sign-out mr-2"></i> Logout</a>
+                  </div>
+               </li>
+               {% endfor %}
+            </ul>
          </div>
       </div>
-<!-- header section end -->
+   </nav>
+   <!-- header section end -->
+
+   <!-- Padding to prevent content from going under fixed navbar -->
+   <div style="padding-top: 80px;"></div>

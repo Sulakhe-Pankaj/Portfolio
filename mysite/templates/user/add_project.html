@@ -1,0 +1,72 @@
+{% include 'user/navbar.html' %}
+
+<div class="section-padding" style="min-height: 80vh; display: flex; align-items: center;">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="premium-card p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="text-white">Add New <span style="color: var(--primary-color);">Project</span></h2>
+                        <p class="text-muted">Fill out the form below to showcase your latest work on your portfolio.
+                        </p>
+                    </div>
+
+                    <form method="post" enctype="multipart/form-data" action="{% url 'add_project_user' %}"
+                        class="premium-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="text-white mb-2" style="font-weight: 500; font-size: 0.9rem;">Project Name
+                                    *</label>
+                                <input type="text" class="form-control" name="project_name"
+                                    placeholder="e.g. E-Commerce Platform" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="text-white mb-2" style="font-weight: 500; font-size: 0.9rem;">Project URL
+                                    *</label>
+                                <input type="url" class="form-control" name="project_link"
+                                    placeholder="https://example.com" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="text-white mb-2" style="font-weight: 500; font-size: 0.9rem;">Project
+                                    Image *</label>
+                                <div class="form-control d-flex align-items-center"
+                                    style="padding: 10px 15px; cursor: pointer;">
+                                    <input type="file" name="project_image" accept="image/*" required
+                                        style="width: 100%; color: var(--text-muted); font-size: 0.9rem;">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="text-white mb-2" style="font-weight: 500; font-size: 0.9rem;">Duration
+                                    *</label>
+                                <input type="text" class="form-control" name="project_duration"
+                                    placeholder="e.g. 2 months / Jan 2025" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="text-white mb-2" style="font-weight: 500; font-size: 0.9rem;">Description
+                                    *</label>
+                                <textarea class="form-control" name="project_desc"
+                                    placeholder="Describe the technologies used and the goal of the project..." rows="4"
+                                    style="resize: none;" required></textarea>
+                            </div>
+
+                            <div class="col-12 mt-4 d-flex justify-content-between align-items-center">
+                                <a href="/portfolio/" class="btn-outline-premium">Cancel</a>
+                                <button type="submit" class="btn-premium"><i class="fa fa-save mr-2"></i> Save
+                                    Project</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% include 'user/footer.html' %}

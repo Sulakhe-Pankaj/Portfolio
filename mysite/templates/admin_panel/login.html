@@ -1,115 +1,61 @@
-<form method="POST" onsubmit="return handleLogin(this)" style="
-    width: 100%;
-    max-width: 380px;
-    margin: 120px auto;
-    padding: 35px 30px;
-    background: #ffffff;
-    border-radius: 14px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    font-family: Arial, sans-serif;
-    transition: transform 0.2s ease;
-">
-    {% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
 
-    <h2 style="
-        text-align: center;
-        margin-bottom: 25px;
-        color: #222;
-        letter-spacing: 0.5px;
-    ">
-        Admin Login
-    </h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Premium Portfolio</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/premium.css">
+    <style>
+        body {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
 
-    <label style="display:block; margin-bottom:6px; color:#444; font-size:14px;">
-        Email
-    </label>
-    <input type="email" name="email" required placeholder="Enter admin email"
-        onfocus="this.style.boxShadow='0 0 0 2px rgba(44,83,100,0.2)'"
-        onblur="this.style.boxShadow='none'"
-        style="
-            width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 16px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            outline: none;
-            transition: box-shadow 0.2s;
-        ">
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-lg-4">
+                <div class="premium-card p-5 text-center shadow-lg" style="border: 1px solid rgba(255,255,255,0.05);">
+                    <div class="mb-4">
+                        <i class="fa fa-user-shield" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    </div>
+                    <h3 class="text-white mb-4">Admin <span style="color: var(--primary-color);">Login</span></h3>
 
-    <label style="display:block; margin-bottom:6px; color:#444; font-size:14px;">
-        Password
-    </label>
-
-    <div style="position: relative; margin-bottom: 18px;">
-        <input id="pwd" type="password" name="password" required placeholder="Enter password"
-            onfocus="this.style.boxShadow='0 0 0 2px rgba(44,83,100,0.2)'"
-            onblur="this.style.boxShadow='none'"
-            style="
-                width: 100%;
-                padding: 10px 40px 10px 12px;
-                border-radius: 6px;
-                border: 1px solid #ccc;
-                outline: none;
-                transition: box-shadow 0.2s;
-            ">
-        <span onclick="togglePwd()" style="
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            font-size: 12px;
-            color: #2c5364;
-            user-select: none;
-        ">Show</span>
+                    <form method="POST" action="/login/" class="premium-form text-left"
+                        onsubmit="document.getElementById('loginBtn').innerHTML='<i class=\'fa fa-spinner fa-spin mr-2\'></i>Authenticating...'">
+                        {% csrf_token %}
+                        <div class="form-group mb-4">
+                            <label class="text-white mb-2" style="font-size: 0.9rem;">Email Address</label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter admin email"
+                                required autofocus>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="text-white mb-2" style="font-size: 0.9rem;">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Enter password"
+                                required>
+                        </div>
+                        <button id="loginBtn" type="submit" class="btn-premium w-100 mt-2">Secure Login <i
+                                class="fa fa-arrow-right ml-2"></i></button>
+                        <div class="mt-4 text-center">
+                            <a href="/home/" class="text-muted"
+                                style="text-decoration: none; font-size: 0.85rem; transition: 0.3s;"
+                                onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">
+                                <i class="fa fa-arrow-left mr-1"></i> Return to Site
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</body>
 
-    <button id="loginBtn" type="submit"
-        onmouseover="this.style.background='#203a43'"
-        onmouseout="this.style.background='#2c5364'"
-        style="
-            width: 100%;
-            padding: 12px;
-            background: #2c5364;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-        ">
-        Login
-    </button>
-
-    <p id="loadingText" style="
-        display: none;
-        margin-top: 12px;
-        text-align: center;
-        font-size: 12px;
-        color: #555;
-    ">
-        Checking credentials...
-    </p>
-
-    <p style="margin-top: 15px; text-align: center; font-size: 12px; color: #777;">
-        Restricted access. Admins only.
-    </p>
-</form>
-
-<script>
-function togglePwd() {
-    const pwd = document.getElementById("pwd");
-    pwd.type = pwd.type === "password" ? "text" : "password";
-}
-
-function handleLogin(form) {
-    const btn = document.getElementById("loginBtn");
-    const loading = document.getElementById("loadingText");
-
-    btn.disabled = true;
-    btn.innerText = "Logging in...";
-    loading.style.display = "block";
-
-    return true; // allow form submit
-}
-</script>
+</html>

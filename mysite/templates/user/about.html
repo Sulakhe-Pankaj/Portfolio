@@ -1,122 +1,84 @@
-{% include 'user/navbar.html'%}
-<div style="height: auto;width: 100%; background: #252f2d!important;float: left;">
+{% include 'user/navbar.html' %}
 
-<div class="portfolio_section layout_padding">
+<div class="section-padding" style="min-height: 80vh; display: flex; align-items: center;">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1 class="portfolio_taital">About <span class="portfolio_taital_1" style="color: whitesmoke;">Me</span></h1>
-      </div>
-    </div>
+    <div class="row align-items-center">
 
-    <div class="portfolio_section">
-      <div class="portfolio_section_2">
-        <div class="row">
+      <div class="col-lg-5 mb-5 mb-lg-0 position-relative">
+        <div
+          style="position: absolute; width: 100px; height: 100px; background: var(--primary-color); filter: blur(80px); z-index: -1;">
+        </div>
+        <h1 class="section-title text-left mb-4" style="font-size: 3rem;">About <span>Me</span></h1>
 
-          <div class="col-md-6">
-            <div class="container_main">
-              <img src="/static/images/about-1.jpg" alt="" class="image">
-              <div class="overlay">
-                <div class="text">
-                  <div class="btn_main">
-                    <div class="buy_bt">
-                      <a href="#">Who I Am</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p style="color:white; margin-top:15px;">
-              I am a developer focused on building clean, responsive and practical web applications.
-              I care about performance and maintainable code.
-            </p>
+        <p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.8;">
+          I am a developer focused on building clean, responsive and practical web applications. I care about
+          performance and maintainable code.
+        </p>
+
+        <p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.8;">
+          I work on websites, dashboards, admin panels and automation systems using modern tools. My goal is to build
+          things that actually work in real projects.
+        </p>
+
+        <div class="d-flex mt-5">
+          <div class="mr-5">
+            <h3 style="color: var(--primary-color); font-size: 2.5rem;">2+</h3>
+            <p class="text-muted">Years Experience</p>
           </div>
-
-          <div class="col-md-6">
-            <div class="container_main">
-              <img src="/static/images/about-2.jpg" alt="" class="image">
-              <div class="overlay">
-                <div class="text">
-                  <div class="btn_main">
-                    <div class="buy_bt">
-                      <a href="#">What I Do</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p style="color:white; margin-top:15px;">
-              I work on websites, dashboards, admin panels and automation systems using modern tools.
-              My goal is to build things that actually work in real projects.
-            </p>
+          <div>
+            <h3 style="color: var(--primary-color); font-size: 2.5rem;">20+</h3>
+            <p class="text-muted">Projects Completed</p>
           </div>
-
         </div>
       </div>
 
-      <div class="portfolio_section_2">
+      <div class="col-lg-6 offset-lg-1">
         <div class="row">
-
-          <div class="col-md-4">
-            <div class="container_main">
-              <img src="/static/images/about-3.jpg" alt="" class="image">
-              <div class="overlay">
-                <div class="text">
-                  <div class="btn_main">
-                    <div class="buy_bt">
-                      <a href="#">Skills</a>
-                    </div>
-                  </div>
-                </div>
+          <div class="col-12 mb-4">
+            <div class="premium-card">
+              <h4 class="mb-3 text-white"><i class="fa fa-code mr-2" style="color: var(--primary-color);"></i> Core
+                Skills</h4>
+              <div class="d-flex flex-wrap" style="gap: 10px;">
+                <span class="badge"
+                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">Python</span>
+                <span class="badge"
+                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">Django</span>
+                <span class="badge"
+                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">JavaScript</span>
+                <span class="badge"
+                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">HTML/CSS</span>
+                <span class="badge"
+                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">MySQL</span>
               </div>
             </div>
-            <p style="color:white; margin-top:15px;">
-              HTML, CSS, JavaScript, Python, Django, MySQL.
-            </p>
           </div>
 
-          <div class="col-md-4">
-            <div class="container_main">
-              <img src="/static/images/about-4.jpg" alt="" class="image">
-              <div class="overlay">
-                <div class="text">
-                  <div class="btn_main">
-                    <div class="buy_bt">
-                      <a href="#">Experience</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="col-12 mb-4">
+            <div class="premium-card">
+              <h4 class="mb-3 text-white"><i class="fa fa-briefcase mr-2" style="color: var(--primary-color);"></i>
+                Experience</h4>
+              <p class="text-muted mb-0">
+                Built multiple academic and personal projects including admin dashboards, portfolio sites, and
+                e-commerce platforms. Specialized in fast, responsive backends.
+              </p>
             </div>
-            <p style="color:white; margin-top:15px;">
-              Built multiple academic and personal projects including admin dashboards and portfolio sites.
-            </p>
           </div>
 
-          <div class="col-md-4">
-            <div class="container_main">
-              <img src="/static/images/about-5.jpg" alt="" class="image">
-              <div class="overlay">
-                <div class="text">
-                  <div class="btn_main">
-                    <div class="buy_bt">
-                      <a href="#">Goals</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="col-12">
+            <div class="premium-card">
+              <h4 class="mb-3 text-white"><i class="fa fa-rocket mr-2" style="color: var(--primary-color);"></i> Goals
+              </h4>
+              <p class="text-muted mb-0">
+                To become a strong full-stack engineer, master cloud architectures, and ship real-world products that
+                solve genuine problems.
+              </p>
             </div>
-            <p style="color:white; margin-top:15px;">
-              To become a strong full-stack engineer and ship real-world products.
-            </p>
           </div>
-
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
-</div>
 
-{% include 'user/footer.html'%}
+{% include 'user/footer.html' %}

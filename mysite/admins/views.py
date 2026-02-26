@@ -44,20 +44,47 @@ def profile(req):
     return render(req, "admin_panel/profile.html",obj)
 def save_user(req):
     if req.method == 'POST':
-        save_user = models.profile(
-            name = req.POST.get('name'),
-            password = req.POST.get('password'),
-            email = req.POST.get('email'),
-            mobile = req.POST.get('mobile'), 
-            address = req.POST.get('address'),
-            dob = req.POST.get('dob'),
-            profile_image = req.FILES.get('profile_image'),
-            bg_image = req.FILES.get('bg_image'),
-            facebook = req.POST.get('facebook'),
-            linkedin = req.POST.get('linkedin')
-        )
-        save_user.save()
-    return redirect("/profile")
+        # Check if this is the first profile ever created
+        is_first = not models.profile.objects.exists()
+        
+        user_profile = models.profile()
+        user_profile.name = req.POST.get('name')
+        user_profile.password = req.POST.get('password')
+        user_profile.email = req.POST.get('email')
+        user_profile.mobile = req.POST.get('mobile')
+        user_profile.address = req.POST.get('address')
+        user_profile.dob = req.POST.get('dob')
+        user_profile.facebook = req.POST.get('facebook')
+        user_profile.linkedin = req.POST.get('linkedin')
+        
+        # If it's the first profile, make it active by default
+        if is_first:
+            user_profile.is_active = True
+        else:
+            user_profile.is_active = False
+            
+        if req.FILES.get('profile_image'):
+            user_profile.profile_image = req.FILES.get('profile_image')
+            
+        if req.FILES.get('bg_image'):
+            user_profile.bg_image = req.FILES.get('bg_image')
+            
+        user_profile.save()
+        messages.success(req, "New profile created successfully!")
+    return redirect("/admin")
+
+def switch_profile(req, id):
+    # Set all profiles to inactive
+    models.profile.objects.all().update(is_active=False)
+    # Set the selected profile to active
+    selected_profile = models.profile.objects.get(id=id)
+    selected_profile.is_active = True
+    selected_profile.save()
+    messages.success(req, f"Profile '{selected_profile.name}' is now active.")
+    
+    # Redirect back to previous page
+    next_url = req.META.get('HTTP_REFERER', '/admin/')
+    return redirect(next_url)
 
 def services(req):
     service_data = models.Service.objects.all()
@@ -170,19 +197,21 @@ def update_profile(req,id):
     if req.method == 'POST':
         user_data.name = req.POST.get('name')
         user_data.password = req.POST.get('password')
-        user_data.mail = req.POST.get('mail')
+        user_data.email = req.POST.get('email')
         user_data.mobile = req.POST.get('mobile')
         user_data.address = req.POST.get('address')
-        user_data.bod = req.POST.get('bod')
-        user_data.bod = req.POST.get('bod')
+        user_data.dob = req.POST.get('dob')
         user_data.facebook = req.POST.get('facebook')
         user_data.linkedin = req.POST.get('linkedin')
 
         if req.FILES.get('profile_image'):
             user_data.profile_image = req.FILES.get('profile_image')
+            
+        if req.FILES.get('bg_image'):
             user_data.bg_image = req.FILES.get('bg_image')
 
         user_data.save()
+        messages.success(req, "Profile updated successfully")
         return redirect('/admin')
     return render(req, 'admin_panel/update_profile.html',{'user':user_data})
      
