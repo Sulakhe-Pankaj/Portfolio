@@ -32,7 +32,9 @@ urlpatterns = [
     path('save_enq/', users.save_enq),
 
     path('save_user/', adminp.save_user),
+    path('confirm_profile_action/<int:id>/', adminp.confirm_profile_action, name='confirm_profile_action'),
     path('admin/', adminp.home),
+    path('register/', adminp.register, name='register'),
     path('login/',adminp.login, name='login'),
     path('logout/',adminp.logout, name='logout'),
     path('profile/', adminp.profile),  

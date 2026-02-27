@@ -112,10 +112,15 @@
                         <small class="text-muted"><i class="fa fa-clock mr-1"></i> {{ p.project_duration }}</small>
                     </td>
                     <td class="text-right">
+                        {% if current_admin_id == p.profile_id or current_admin_id == p.profile.id %}
                         <a href="{% url 'update_project' p.id %}" class="admin-icon-btn edit" title="Edit Project"><i
                                 class="fa fa-pen"></i></a>
                         <a href="{% url 'delete_project' p.id %}" class="admin-icon-btn delete" title="Delete Project"
                             onclick="return confirm('Delete this project?')"><i class="fa fa-trash"></i></a>
+                        {% else %}
+                        <span class="text-muted" style="font-size: 0.85rem;"><i class="fa fa-eye mr-1"></i>View
+                            Only</span>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -150,10 +155,15 @@
                         <h6 class="text-white mb-0" style="font-size: 0.95rem;">{{ s.service_title }}</h6>
                     </td>
                     <td class="text-right">
+                        {% if current_admin_id == s.profile_id or current_admin_id == s.profile.id %}
                         <a href="{% url 'update_service' s.id %}" class="admin-icon-btn edit" title="Edit Service"><i
                                 class="fa fa-pen"></i></a>
                         <a href="{% url 'delete_service' s.id %}" class="admin-icon-btn delete" title="Delete Service"
                             onclick="return confirm('Delete this service?')"><i class="fa fa-trash"></i></a>
+                        {% else %}
+                        <span class="text-muted" style="font-size: 0.85rem;"><i class="fa fa-eye mr-1"></i>View
+                            Only</span>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -197,10 +207,15 @@
                                 class="fa fa-calendar-alt mr-2 text-muted"></i>{{ b.blog_date }}</span>
                     </td>
                     <td class="text-right">
+                        {% if current_admin_id == b.profile_id or current_admin_id == b.profile.id %}
                         <a href="{% url 'update_blog' b.id %}" class="admin-icon-btn edit" title="Edit Post"><i
                                 class="fa fa-pen"></i></a>
                         <a href="{% url 'delete_blog' b.id %}" class="admin-icon-btn delete" title="Delete Post"
                             onclick="return confirm('Delete this blog post?')"><i class="fa fa-trash"></i></a>
+                        {% else %}
+                        <span class="text-muted" style="font-size: 0.85rem;"><i class="fa fa-eye mr-1"></i>View
+                            Only</span>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

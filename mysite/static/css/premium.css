@@ -12,6 +12,17 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+[data-theme="light"] {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --card-border: rgba(0, 0, 0, 0.08);
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --accent: #7c3aed;
+}
+
 body {
     background-color: var(--bg-color) !important;
     color: var(--text-main) !important;
@@ -63,6 +74,10 @@ a:hover {
     z-index: 1000;
     transition: var(--transition);
     padding: 15px 0;
+}
+
+[data-theme="light"] .premium-nav {
+    background: rgba(255, 255, 255, 0.85);
 }
 
 .premium-nav .navbar-brand img {
@@ -141,6 +156,13 @@ a:hover {
 
 .hero-title span {
     background: linear-gradient(to right, var(--primary-color), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .hero-title {
+    background: linear-gradient(to right, #000, var(--text-muted));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -229,6 +251,13 @@ a:hover {
     opacity: 1;
 }
 
+[data-theme="light"] .premium-card {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+[data-theme="light"] .premium-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
 /* Service Card */
 .service-icon {
     width: 60px;
@@ -280,6 +309,10 @@ a:hover {
     gap: 15px;
 }
 
+[data-theme="light"] .project-overlay {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+}
+
 .project-card:hover .project-overlay {
     transform: translateY(0);
 }
@@ -319,6 +352,11 @@ a:hover {
     color: white;
 }
 
+[data-theme="light"] .btn-outline-premium:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-main);
+}
+
 .btn-danger-outline {
     background: transparent;
     color: #ef4444;
@@ -353,6 +391,11 @@ a:hover {
     color: var(--text-muted);
 }
 
+[data-theme="light"] .premium-form .form-control:focus {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
 /* File Inputs specifically */
 .premium-form input[type="file"] {
     color: var(--text-main) !important;
@@ -369,6 +412,10 @@ a:hover {
     transition: var(--transition);
 }
 
+[data-theme="light"] .premium-form input[type="file"]::-webkit-file-upload-button {
+    background: rgba(0, 0, 0, 0.05);
+}
+
 .premium-form input[type="file"]::-webkit-file-upload-button:hover {
     background: var(--primary-color);
     border-color: var(--primary-color);
@@ -380,6 +427,10 @@ a:hover {
     border-top: 1px solid var(--card-border);
     padding: 40px 0;
     text-align: center;
+}
+
+[data-theme="light"] .premium-footer {
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .footer-socials a {

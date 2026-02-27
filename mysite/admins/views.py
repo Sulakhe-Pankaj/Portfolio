@@ -4,6 +4,25 @@ from django.http import HttpResponse
 from django.contrib import messages
 
 # Create your views here.
+def confirm_profile_action(req, id):
+    try:
+        profile = models.profile.objects.get(id=id)
+    except models.profile.DoesNotExist:
+        messages.error(req, "Profile not found.")
+        return redirect('/admin/')
+
+    next_url = req.GET.get('next', '/admin/')
+
+    if req.method == 'POST':
+        password = req.POST.get('password')
+        if password == profile.password:
+            # Set auth session flag
+            req.session[f'auth_{id}'] = True
+            return redirect(next_url)
+        else:
+            messages.error(req, "Incorrect password. Please try again.")
+
+    return render(req, 'admin_panel/confirm_password.html', {'profile_name': profile.name})
 def login(req):
     if req.method == 'POST':
         email = req.POST.get('email')
@@ -22,6 +41,9 @@ def logout(req):
     req.session.flush()
     return redirect('/login')
 
+def register(req):
+    return render(req, 'admin_panel/register.html')
+
 def home(req):
     if not req.session.get('admin_id'):
         return redirect('/login/')
@@ -33,7 +55,8 @@ def home(req):
         'user_data':user_data,
         'service_data':service_data,
         'project_data':project_data,
-        'blog_data':blog_data
+        'blog_data':blog_data,
+        'current_admin_id': req.session.get('admin_id')
     }
     return render (req,'admin_panel/home.html',obj)
 def profile(req):
@@ -52,10 +75,16 @@ def save_user(req):
         user_profile.password = req.POST.get('password')
         user_profile.email = req.POST.get('email')
         user_profile.mobile = req.POST.get('mobile')
-        user_profile.address = req.POST.get('address')
-        user_profile.dob = req.POST.get('dob')
-        user_profile.facebook = req.POST.get('facebook')
-        user_profile.linkedin = req.POST.get('linkedin')
+        user_profile.address = req.POST.get('address', '')
+        dob_val = req.POST.get('dob')
+        if dob_val:
+            user_profile.dob = dob_val
+        else:
+            from django.utils import timezone
+            user_profile.dob = timezone.now()
+            
+        user_profile.facebook = req.POST.get('facebook', '')
+        user_profile.linkedin = req.POST.get('linkedin', '')
         
         # If it's the first profile, make it active by default
         if is_first:
@@ -71,15 +100,31 @@ def save_user(req):
             
         user_profile.save()
         messages.success(req, "New profile created successfully!")
-    return redirect("/admin")
+        
+        # If created by an existing admin, stay in admin panel. 
+        # If created by a new public user, go to login.
+        if req.session.get('admin_id'):
+            return redirect("/admin")
+        else:
+            return redirect("/login")
+    return redirect("/login")
 
 def switch_profile(req, id):
+    # Check for authentication
+    if not req.session.get(f'auth_{id}'):
+        return redirect(f'/confirm_profile_action/{id}/?next=/switch_profile/{id}/')
+
     # Set all profiles to inactive
     models.profile.objects.all().update(is_active=False)
     # Set the selected profile to active
     selected_profile = models.profile.objects.get(id=id)
     selected_profile.is_active = True
     selected_profile.save()
+
+    # Clear auth flag
+    if f'auth_{id}' in req.session:
+        del req.session[f'auth_{id}']
+
     messages.success(req, f"Profile '{selected_profile.name}' is now active.")
     
     # Redirect back to previous page
@@ -95,6 +140,7 @@ def services(req):
 def save_services(req):
     if req.method == 'POST':
         save_services =models.Service(
+            profile_id=req.session.get('admin_id'),
             service_image = req.FILES.get('service_image'), 
             service_title = req.POST.get('service_title')
         )
@@ -112,6 +158,7 @@ def project(req):
 def save_project(req):
     if req.method == 'POST':
         project_data = models.project(
+            profile_id=req.session.get('admin_id'),
             project_name = req.POST.get('project_name'),
             project_image = req.FILES.get('project_image'),
             project_desc = req.POST.get('project_desc'),
@@ -131,6 +178,7 @@ def blogs(req):
 def save_blog(req):
     if req.method == "POST":
         blog_data = models.blog(
+           profile_id=req.session.get('admin_id'),
            blog_date = req.POST.get('blog_date'),
            blog_image = req.FILES.get('blog_image'),
            blog_title = req.POST.get('blog_title'),
@@ -151,15 +199,27 @@ def enquiry(req):
 def delete_service(req, id):
      services_data =  models.Service.objects.filter(id=id)
      if services_data.exists():
+         service = services_data.first()
+         if service.profile_id != req.session.get('admin_id'):
+             messages.error(req, 'You do not have permission to delete this service.')
+             return redirect('/admin')
          services_data.delete()
      else:
          return HttpResponse('data is not found')
      return redirect('/admin')
 
 def delete_profile(req, id):
+     # Check for authentication
+     if not req.session.get(f'auth_{id}'):
+         return redirect(f'/confirm_profile_action/{id}/?next=/delete_profile/{id}/')
+
      user_data =  models.profile.objects.filter(id=id)
      if user_data.exists():
          user_data.delete()
+         
+         # Clear auth flag if exists
+         if f'auth_{id}' in req.session:
+             del req.session[f'auth_{id}']
      else:
          return HttpResponse('data is not found')
      return redirect('/admin')
@@ -167,6 +227,10 @@ def delete_profile(req, id):
 def delete_project(req, id):
      project_data =  models.project.objects.filter(id=id)
      if project_data.exists():
+         project = project_data.first()
+         if project.profile_id != req.session.get('admin_id'):
+             messages.error(req, 'You do not have permission to delete this project.')
+             return redirect('/admin')
          project_data.delete()
      else:
          return HttpResponse('data is not found')
@@ -175,6 +239,10 @@ def delete_project(req, id):
 def delete_blog(req, id):
      blog_data =  models.blog.objects.filter(id=id)
      if blog_data.exists():
+         blog = blog_data.first()
+         if blog.profile_id != req.session.get('admin_id'):
+             messages.error(req, 'You do not have permission to delete this blog post.')
+             return redirect('/admin')
          blog_data.delete()
      else:
          return HttpResponse('data is not found')
@@ -184,6 +252,9 @@ def delete_blog(req, id):
      
 def update_service(req,id):
     services_data = models.Service.objects.get(id = id)
+    if services_data.profile_id and services_data.profile_id != req.session.get('admin_id'):
+        messages.error(req, 'You do not have permission to update this service.')
+        return redirect('/admin')
     if req.method == 'POST':
         services_data.service_title = req.POST.get('service_title')
         if req.FILES.get('service_image'):
@@ -193,6 +264,10 @@ def update_service(req,id):
     return render(req, 'admin_panel/update_service.html',{'services':services_data})
 
 def update_profile(req,id):
+    # Check for authentication
+    if not req.session.get(f'auth_{id}'):
+        return redirect(f'/confirm_profile_action/{id}/?next=/update_profile/{id}/')
+
     user_data = models.profile.objects.get(id = id)
     if req.method == 'POST':
         user_data.name = req.POST.get('name')
@@ -211,12 +286,20 @@ def update_profile(req,id):
             user_data.bg_image = req.FILES.get('bg_image')
 
         user_data.save()
+
+        # Clear auth flag
+        if f'auth_{id}' in req.session:
+            del req.session[f'auth_{id}']
+
         messages.success(req, "Profile updated successfully")
         return redirect('/admin')
     return render(req, 'admin_panel/update_profile.html',{'user':user_data})
      
 def update_project(req,id):
     project_data = models.project.objects.get(id=id)
+    if project_data.profile_id and project_data.profile_id != req.session.get('admin_id'):
+        messages.error(req, 'You do not have permission to update this project.')
+        return redirect('/admin')
     if req.method == "POST":
         project_data.project_name = req.POST.get("project_name")
         project_data.project_desc = req.POST.get("project_desc")
@@ -233,6 +316,9 @@ def update_project(req,id):
 
 def update_blog(req,id):
     blog_data = models.blog.objects.get(id=id)
+    if blog_data.profile_id and blog_data.profile_id != req.session.get('admin_id'):
+        messages.error(req, 'You do not have permission to update this blog post.')
+        return redirect('/admin')
     if req.method == 'POST':
         blog_data.blog_date = req.POST.get('blog_date')
         blog_data.blog_title = req.POST.get('blog_title')

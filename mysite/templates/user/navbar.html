@@ -15,6 +15,7 @@
 
    <!-- Custom Premium CSS -->
    <link rel="stylesheet" href="/static/css/premium.css">
+   <script src="/static/js/theme.js"></script>
 
    <!-- font awesome css -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -55,6 +56,11 @@
                <li class="nav-item">
                   <a class="nav-link" href="/contact/">Contact</a>
                </li>
+               <li class="nav-item ml-2">
+                  <a href="#" class="btn-outline-premium theme-toggle d-flex align-items-center justify-content-center"
+                     title="Toggle Theme" style="padding: 5px; width: 35px; height: 35px; border-radius: 50%;"><i
+                        class="fa fa-sun" style="font-size: 1rem;"></i></a>
+               </li>
 
                <!-- Profile Dropdown -->
                {% for i in user_data|slice:":1" %}
@@ -91,11 +97,21 @@
 
                      <a class="dropdown-item text-white mt-2" href="/admin/" style="transition:0.3s;"><i
                            class="fa fa-user-shield mr-2 text-primary"></i> Admin Portal</a>
+                     <a class="dropdown-item text-white mt-2" href="{% url 'register' %}" style="transition:0.3s;"><i
+                           class="fa fa-user-plus mr-2 text-success"></i> Register Profile</a>
                      <a class="dropdown-item text-white mt-2" href="{% url 'login' %}" style="transition:0.3s;"><i
                            class="fa fa-sign-in mr-2"></i> Log In</a>
                      <a class="dropdown-item text-danger" href="{% url 'logout' %}" style="transition:0.3s;"><i
                            class="fa fa-sign-out mr-2"></i> Logout</a>
                   </div>
+               </li>
+               {% empty %}
+               <!-- Fallback if no profiles exist in the system yet -->
+               <li class="nav-item ml-3">
+                  <a href="{% url 'register' %}" class="btn-premium btn-sm"
+                     style="padding: 8px 15px; border-radius: 20px;">
+                     Create Profile <i class="fa fa-arrow-right ml-1"></i>
+                  </a>
                </li>
                {% endfor %}
             </ul>

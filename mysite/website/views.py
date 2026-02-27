@@ -5,11 +5,15 @@ from django.contrib import messages
 
 # Create your views here.
 def home(req):
-    user_data = models.profile.objects.filter(is_active=True)
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
+        
+    user_data = models.profile.objects.filter(id=admin_id)
     all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.all() 
-    project_data = models.project.objects.all() 
-    blog_data = models.blog.objects.all() 
+    service_data = models.Service.objects.filter(profile_id=admin_id) 
+    project_data = models.project.objects.filter(profile_id=admin_id) 
+    blog_data = models.blog.objects.filter(profile_id=admin_id) 
     obj =  {
         'user_data':user_data,
         'all_profiles':all_profiles,
@@ -20,11 +24,15 @@ def home(req):
     return render (req,'user/index.html',obj)
     
 def about(req):
-    user_data = models.profile.objects.filter(is_active=True)
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
+        
+    user_data = models.profile.objects.filter(id=admin_id)
     all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.all() 
-    project_data = models.project.objects.all() 
-    blog_data = models.blog.objects.all() 
+    service_data = models.Service.objects.filter(profile_id=admin_id) 
+    project_data = models.project.objects.filter(profile_id=admin_id) 
+    blog_data = models.blog.objects.filter(profile_id=admin_id) 
     obj =  {
         'user_data':user_data,
         'all_profiles':all_profiles,
@@ -35,11 +43,15 @@ def about(req):
     return render (req,'user/about.html',obj)
     
 def contact(req):
-    user_data = models.profile.objects.filter(is_active=True)
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
+        
+    user_data = models.profile.objects.filter(id=admin_id)
     all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.all() 
-    project_data = models.project.objects.all() 
-    blog_data = models.blog.objects.all() 
+    service_data = models.Service.objects.filter(profile_id=admin_id) 
+    project_data = models.project.objects.filter(profile_id=admin_id) 
+    blog_data = models.blog.objects.filter(profile_id=admin_id) 
     obj =  {
         'user_data':user_data,
         'all_profiles':all_profiles,
@@ -50,11 +62,15 @@ def contact(req):
     return render (req,'user/contact.html',obj)
     
 def portfolio(req):
-    user_data = models.profile.objects.filter(is_active=True)
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
+        
+    user_data = models.profile.objects.filter(id=admin_id)
     all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.all() 
-    project_data = models.project.objects.all() 
-    blog_data = models.blog.objects.all() 
+    service_data = models.Service.objects.filter(profile_id=admin_id) 
+    project_data = models.project.objects.filter(profile_id=admin_id) 
+    blog_data = models.blog.objects.filter(profile_id=admin_id) 
     obj =  {
         'user_data':user_data,
         'all_profiles':all_profiles,
@@ -65,11 +81,15 @@ def portfolio(req):
     return render (req,'user/portfolio.html',obj)
     
 def blog(req):
-    user_data = models.profile.objects.filter(is_active=True)
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
+        
+    user_data = models.profile.objects.filter(id=admin_id)
     all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.all() 
-    project_data = models.project.objects.all() 
-    blog_data = models.blog.objects.all() 
+    service_data = models.Service.objects.filter(profile_id=admin_id) 
+    project_data = models.project.objects.filter(profile_id=admin_id) 
+    blog_data = models.blog.objects.filter(profile_id=admin_id) 
     obj =  {
         'user_data':user_data,
         'all_profiles':all_profiles,
@@ -80,11 +100,15 @@ def blog(req):
     return render (req,'user/blog.html',obj)
     
 def service(req):
-    user_data = models.profile.objects.filter(is_active=True)
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
+        
+    user_data = models.profile.objects.filter(id=admin_id)
     all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.all() 
-    project_data = models.project.objects.all() 
-    blog_data = models.blog.objects.all() 
+    service_data = models.Service.objects.filter(profile_id=admin_id) 
+    project_data = models.project.objects.filter(profile_id=admin_id) 
+    blog_data = models.blog.objects.filter(profile_id=admin_id) 
     obj =  {
         'user_data':user_data,
         'all_profiles':all_profiles,
@@ -108,43 +132,56 @@ def save_enq(req):
     # =============================== delete section ===============================
     
 def delete_service_user(req, id):
-     services_data =  models.Service.objects.filter(id=id)
+     admin_id = req.session.get('admin_id')
+     if not admin_id:
+         return redirect('/login/')
+     services_data =  models.Service.objects.filter(id=id, profile_id=admin_id)
      if services_data.exists():
          services_data.delete()
          messages.success(req, "Service deleted successfully")
-         return redirect('/service')
      else:
-         messages.success(req, "data is not found")
+         messages.error(req, "Data is not found or you don't have permission")
      return redirect('/service')
 
 def delete_profile_user(req, id):
+     admin_id = req.session.get('admin_id')
+     if not admin_id or str(admin_id) != str(id):
+         return redirect('/login/')
      user_data =  models.profile.objects.filter(id=id)
      if user_data.exists():
          user_data.delete()
-         return redirect('/home')
-     else:
-         return redirect('/home')
+         req.session.flush()
+     return redirect('/home')
      
 def delete_project_user(req, id):
-     project_data =  models.project.objects.filter(id=id)
+     admin_id = req.session.get('admin_id')
+     if not admin_id:
+         return redirect('/login/')
+     project_data =  models.project.objects.filter(id=id, profile_id=admin_id)
      if project_data.exists():
          project_data.delete()
      else:
-         return HttpResponse('Data is not found')
+         return HttpResponse('Data is not found or no permission')
      return redirect('/portfolio')
      
 def delete_blog_user(req, id):
-     blog_data =  models.blog.objects.filter(id=id)
+     admin_id = req.session.get('admin_id')
+     if not admin_id:
+         return redirect('/login/')
+     blog_data =  models.blog.objects.filter(id=id, profile_id=admin_id)
      if blog_data.exists():
          blog_data.delete()
-         return redirect('/blog')
-     else:
-         return redirect('/blog')
+     return redirect('/blog')
      
 #  ================================= update section ============================
      
 def update_service_user(req,id):
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
     services_data = models.Service.objects.get(id = id)
+    if services_data.profile_id != admin_id:
+        return redirect('/service')
     if req.method == 'POST':
         services_data.service_title = req.POST.get('service_title')
         if req.FILES.get('service_image'):
@@ -154,6 +191,9 @@ def update_service_user(req,id):
     return render(req, 'admin_panel/update_service.html',{'services':services_data})
 
 def update_profile_user(req,id):
+    admin_id = req.session.get('admin_id')
+    if not admin_id or str(admin_id) != str(id):
+        return redirect('/login/')
     user_data = models.profile.objects.get(id = id)
     if req.method == 'POST':
         user_data.name = req.POST.get('name')
@@ -176,7 +216,12 @@ def update_profile_user(req,id):
     return render(req, 'admin_panel/update_profile.html',{'user':user_data})
      
 def update_project_user(req,id):
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
     project_data = models.project.objects.get(id=id)
+    if project_data.profile_id != admin_id:
+        return redirect('/portfolio')
     if req.method == "POST":
         project_data.project_name = req.POST.get("project_name")
         project_data.project_desc = req.POST.get("project_desc")
@@ -192,7 +237,12 @@ def update_project_user(req,id):
     return render(req, "admin_panel/update_project.html", {"project": project_data})
 
 def update_blog_user(req,id):
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
     blog_data = models.blog.objects.get(id=id)
+    if blog_data.profile_id != admin_id:
+        return redirect('/blog')
     if req.method == 'POST':
         blog_data.blog_date = req.POST.get('blog_date')
         blog_data.blog_title = req.POST.get('blog_title')
@@ -207,10 +257,14 @@ def update_blog_user(req,id):
 
 
 def add_project_user(req):
-    user_data = models.profile.objects.filter(is_active=True)
+    admin_id = req.session.get('admin_id')
+    if not admin_id:
+        return redirect('/login/')
+    user_data = models.profile.objects.filter(id=admin_id)
     
     if req.method == 'POST':
         project_data = models.project(
+            profile_id=admin_id,
             project_name = req.POST.get('project_name'),
             project_image = req.FILES.get('project_image'),
             project_desc = req.POST.get('project_desc'),
