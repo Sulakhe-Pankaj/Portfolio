@@ -5,7 +5,7 @@ class profile(models.Model):
      name = models.CharField(max_length=300)
      password = models.CharField(max_length=500)
      email = models.EmailField()
-     mobile = models.IntegerField()
+     mobile = models.CharField(max_length=15)
      address = models.CharField(max_length=500)
      dob = models.DateTimeField()
      profile_image = models.ImageField(upload_to='static/asset')
@@ -38,7 +38,7 @@ class enq(models.Model):
      profile = models.ForeignKey(profile, on_delete=models.CASCADE, null=True, blank=True)
      name = models.TextField(max_length=300)
      email = models.TextField(max_length=300)
-     mobile = models.IntegerField()
+     mobile = models.CharField(max_length=15)
      massage = models.TextField(max_length=300)
 
 
