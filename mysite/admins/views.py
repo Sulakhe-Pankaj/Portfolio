@@ -45,7 +45,9 @@ def register(req):
     return render(req, 'admin_panel/register.html')
 
 def home(req):
-    if not req.session.get('admin_id'):
+    admin_id = req.session.get('admin_id')
+    if not admin_id or not models.profile.objects.filter(id=admin_id).exists():
+        req.session.flush()
         return redirect('/login/')
     user_data = models.profile.objects.all() 
     service_data = models.Service.objects.all() 
@@ -138,9 +140,13 @@ def services(req):
     }
     return render(req, "admin_panel/services.html",obj)
 def save_services(req):
+    admin_id = req.session.get('admin_id')
+    if not admin_id or not models.profile.objects.filter(id=admin_id).exists():
+        return redirect('/login/')
+        
     if req.method == 'POST':
         save_services =models.Service(
-            profile_id=req.session.get('admin_id'),
+            profile_id=admin_id,
             service_image = req.FILES.get('service_image'), 
             service_title = req.POST.get('service_title')
         )
@@ -156,9 +162,13 @@ def project(req):
     return render(req, "admin_panel/project.html",obj)
 
 def save_project(req):
+    admin_id = req.session.get('admin_id')
+    if not admin_id or not models.profile.objects.filter(id=admin_id).exists():
+        return redirect('/login/')
+        
     if req.method == 'POST':
         project_data = models.project(
-            profile_id=req.session.get('admin_id'),
+            profile_id=admin_id,
             project_name = req.POST.get('project_name'),
             project_image = req.FILES.get('project_image'),
             project_desc = req.POST.get('project_desc'),
@@ -176,9 +186,13 @@ def blogs(req):
     return render(req,"admin_panel/blog.html",obj)
 
 def save_blog(req):
+    admin_id = req.session.get('admin_id')
+    if not admin_id or not models.profile.objects.filter(id=admin_id).exists():
+        return redirect('/login/')
+        
     if req.method == "POST":
         blog_data = models.blog(
-           profile_id=req.session.get('admin_id'),
+           profile_id=admin_id,
            blog_date = req.POST.get('blog_date'),
            blog_image = req.FILES.get('blog_image'),
            blog_title = req.POST.get('blog_title'),
@@ -220,6 +234,11 @@ def delete_profile(req, id):
          # Clear auth flag if exists
          if f'auth_{id}' in req.session:
              del req.session[f'auth_{id}']
+             
+         # If the active user deleted their own profile, log them out entirely
+         if str(req.session.get('admin_id')) == str(id):
+             req.session.flush()
+             return redirect('/login')
      else:
          return HttpResponse('data is not found')
      return redirect('/admin')
