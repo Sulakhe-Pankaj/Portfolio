@@ -93,7 +93,7 @@
             <div class="project-card">
                <img src="/{{ p.project_image }}" alt="{{ p.project_name }}" class="project-img">
                <div class="project-overlay">
-                  <a href="/{{ p.project_link }}" class="btn-premium btn-sm"
+                  <a href="{{ p.project_link }}" class="btn-premium btn-sm"
                      style="padding: 8px 20px; font-size: 0.9rem;">Live Demo</a>
                </div>
             </div>
@@ -105,6 +105,43 @@
       {% if project_data %}
       <div class="text-center mt-5">
          <a href="/portfolio/" class="btn-outline-premium">View Full Portfolio</a>
+      </div>
+      {% endif %}
+   </div>
+</div>
+
+<!-- Blog Section -->
+<div class="section-padding" style="background: rgba(255,255,255,0.01);">
+   <div class="container">
+      <h2 class="section-title">Latest <span>Thoughts</span></h2>
+      <div class="row">
+         {% for i in blog_data|slice:":3" %}
+         <div class="col-lg-4 col-md-6 mb-4">
+            <div class="blog-card" style="display: flex; flex-direction: column;">
+               <div class="position-relative">
+                  <img src="/{{ i.blog_image }}" alt="Blog Image" class="blog-img">
+                  <div
+                     style="position: absolute; top: 15px; left: 15px; background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
+                     {{ i.blog_date }}
+                  </div>
+               </div>
+
+               <div class="blog-content flex-grow-1 d-flex flex-column">
+                  <h4 class="text-white mb-3">{{ i.blog_title }}</h4>
+                  <p class="text-muted mb-4"
+                     style="font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                     {{ i.blog_description }}
+                  </p>
+               </div>
+            </div>
+         </div>
+         {% empty %}
+         <div class="col-12 text-center text-muted">No posts added yet.</div>
+         {% endfor %}
+      </div>
+      {% if blog_data %}
+      <div class="text-center mt-5">
+         <a href="/blog/" class="btn-outline-premium">Read All Posts</a>
       </div>
       {% endif %}
    </div>

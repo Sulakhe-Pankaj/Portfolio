@@ -10,7 +10,9 @@
             deployment.
          </p>
          <div class="mt-4">
+            {% if admin_id and admin_id == active_profile_id %}
             <a href="/services" class="btn-premium">Add New Service</a>
+            {% endif %}
          </div>
       </div>
 
@@ -19,6 +21,7 @@
          <div class="col-lg-4 col-md-6 mb-4">
             <div class="premium-card text-center" style="position: relative;">
                <!-- Action Buttons -->
+               {% if admin_id and admin_id == active_profile_id %}
                <div style="position: absolute; top: 15px; right: 15px; z-index: 10;">
                   <a href="{% url 'update_service_user' s.id %}" class="btn-outline-premium"
                      style="padding: 5px 10px; font-size: 0.8rem; margin-right: 5px;" title="Update">
@@ -30,6 +33,7 @@
                      <i class="fa-solid fa-trash"></i>
                   </a>
                </div>
+               {% endif %}
 
                <div class="service-icon mx-auto mt-3"
                   style="background-image: url('/{{s.service_image}}'); background-color: transparent;"></div>

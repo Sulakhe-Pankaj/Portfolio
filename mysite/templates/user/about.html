@@ -1,82 +1,217 @@
 {% include 'user/navbar.html' %}
 
-<div class="section-padding" style="min-height: 80vh; display: flex; align-items: center;">
+<!-- Project Hero Section -->
+<div class="section-padding position-relative"
+  style="min-height: 50vh; display: flex; align-items: center; border-bottom: 1px solid var(--card-border);">
+  <div class="hero-bg-glow" style="width: 500px; height: 500px; top: 0%; left: 0%;"></div>
+  <div class="container position-relative" style="z-index: 1;">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="hero-title mb-4" style="font-size: 3.5rem;">About This <span>Platform</span></h1>
+        <p class="text-muted mb-4" style="font-size: 1.2rem; line-height: 1.8;">
+          Welcome to the comprehensive breakdown of this dynamic portfolio management system. This project is not merely
+          a static webpage; it is a full-fledged, multi-tenant web application engineered with modern technologies and a
+          focus on premium user experience, interactivity, and rapid cloud deployment.
+        </p>
+        <div class="d-flex justify-content-center mt-5 flex-wrap" style="gap: 20px;">
+          <span class="badge"
+            style="background: rgba(99, 102, 241, 0.1); color: var(--primary-color); padding: 10px 20px; border-radius: 30px; font-size: 1rem; border: 1px solid var(--primary-color);">Django
+            Backend</span>
+          <span class="badge"
+            style="background: rgba(99, 102, 241, 0.1); color: var(--primary-color); padding: 10px 20px; border-radius: 30px; font-size: 1rem; border: 1px solid var(--primary-color);">Interactive
+            UI</span>
+          <span class="badge"
+            style="background: rgba(99, 102, 241, 0.1); color: var(--primary-color); padding: 10px 20px; border-radius: 30px; font-size: 1rem; border: 1px solid var(--primary-color);">Cloud
+            Integrated</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mission & Objective -->
+<div class="section-padding" style="background: rgba(255,255,255,0.01);">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="premium-card h-100 p-5" style="border-top: 4px solid var(--primary-color);">
+          <h3 class="text-white mb-4"><i class="fa fa-bullseye mr-3" style="color: var(--primary-color);"></i>Our
+            Objective</h3>
+          <p class="text-muted" style="font-size: 1.1rem; line-height: 1.7;">
+            The core objective of this project is to demonstrate sophisticated full-stack development skills by creating
+            a scalable, secure, and visually stunning web application. It serves as a living, breathing example of how
+            complex back-end logic, seamless database structures, and refined front-end aesthetics can merge to create a
+            memorable user experience.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="premium-card h-100 p-5" style="border-bottom: 4px solid var(--primary-color);">
+          <h3 class="text-white mb-4"><i class="fa fa-rocket mr-3" style="color: var(--primary-color);"></i>The Mission
+          </h3>
+          <p class="text-muted" style="font-size: 1.1rem; line-height: 1.7;">
+            To provide a dynamic platform that allows administrators to effortlessly manage their digital
+            presence—updating projects, publishing blogs, and offering services—without ever needing to deal with HTML
+            or source code, all while maintaining cutting-edge performance standards.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Technical Details & Interactivity -->
+<div class="section-padding"
+  style="border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title mb-3">Under the <span>Hood</span></h2>
+      <p class="text-muted max-w-2xl mx-auto" style="max-width: 700px;">
+        A deep dive into the technologies, design systems, animations, and capabilities that power this interactive
+        platform.
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="premium-card p-4 h-100 d-flex align-items-start">
+          <i class="fa fa-code mt-1 mr-4" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+          <div>
+            <h4 class="text-white mb-3">Django framework</h4>
+            <p class="text-muted" style="font-size: 0.95rem;">
+              Built on the robust Python Django framework, this site features secure routing, an intuitive ORM for
+              database abstraction, and an extensible architecture. The custom middleware and data flows ensure strict
+              multi-tenant control.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="premium-card p-4 h-100 d-flex align-items-start">
+          <i class="fa fa-paint-brush mt-1 mr-4" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+          <div>
+            <h4 class="text-white mb-3">Premium UX & Animations</h4>
+            <p class="text-muted" style="font-size: 0.95rem;">
+              The user interface employs a bespoke 'Glassmorphism' layout equipped with transparent, blurred
+              backgrounds. Micro-interactions and CSS transitions bring the site to life, reacting dynamically to every
+              hover and click on any screen size.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="premium-card p-4 h-100 d-flex align-items-start">
+          <i class="fa fa-database mt-1 mr-4" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+          <div>
+            <h4 class="text-white mb-3">Hybrid Database Scaling</h4>
+            <p class="text-muted" style="font-size: 0.95rem;">
+              Designed to easily toggle between a lightweight local SQLite engine for rapid development, and a powerful,
+              cloud-hosted Aiven MySQL database cluster for secure, high-traffic production environments.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="premium-card p-4 h-100 d-flex align-items-start">
+          <i class="fa fa-cloud-upload-alt mt-1 mr-4" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+          <div>
+            <h4 class="text-white mb-3">Cloudinary Architecture</h4>
+            <p class="text-muted" style="font-size: 0.95rem;">
+              Media files are decoupled from the core application server and instantly uploaded to Cloudinary's global
+              content delivery network. This guarantees that images and assets are optimized and load at blazing speeds
+              worldwide.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Feedback Section -->
+<div class="section-padding" style="background: rgba(255,255,255,0.01);">
   <div class="container">
     <div class="row align-items-center">
-
-      <div class="col-lg-5 mb-5 mb-lg-0 position-relative">
-        <div
-          style="position: absolute; width: 100px; height: 100px; background: var(--primary-color); filter: blur(80px); z-index: -1;">
-        </div>
-        <h1 class="section-title text-left mb-4" style="font-size: 3rem;">About <span>Me</span></h1>
-
+      <div class="col-lg-5 mb-5 mb-lg-0">
+        <h2 class="section-title text-left mb-4" style="font-size: 2.5rem;">User <span>Feedback</span></h2>
         <p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.8;">
-          I am a developer focused on building clean, responsive and practical web applications. I care about
-          performance and maintainable code.
+          This platform thrives on interaction and iteration. All user submissions, inquiries, bug reports, and design
+          critiques are automatically routed to a secure, centralized database.
         </p>
-
         <p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.8;">
-          I work on websites, dashboards, admin panels and automation systems using modern tools. My goal is to build
-          things that actually work in real projects.
+          Want to test the backend logic? Send a message directly to the administrator dashboard using this robust data
+          pipeline!
         </p>
-
-        <div class="d-flex mt-5">
-          <div class="mr-5">
-            <h3 style="color: var(--primary-color); font-size: 2.5rem;">2+</h3>
-            <p class="text-muted">Years Experience</p>
-          </div>
-          <div>
-            <h3 style="color: var(--primary-color); font-size: 2.5rem;">20+</h3>
-            <p class="text-muted">Projects Completed</p>
-          </div>
-        </div>
       </div>
 
       <div class="col-lg-6 offset-lg-1">
-        <div class="row">
-          <div class="col-12 mb-4">
-            <div class="premium-card">
-              <h4 class="mb-3 text-white"><i class="fa fa-code mr-2" style="color: var(--primary-color);"></i> Core
-                Skills</h4>
-              <div class="d-flex flex-wrap" style="gap: 10px;">
-                <span class="badge"
-                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">Python</span>
-                <span class="badge"
-                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">Django</span>
-                <span class="badge"
-                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">JavaScript</span>
-                <span class="badge"
-                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">HTML/CSS</span>
-                <span class="badge"
-                  style="background: rgba(255,255,255,0.05); color: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--card-border);">MySQL</span>
+        <div class="premium-card p-5">
+          <h3 class="text-white mb-4">Test System Response</h3>
+          <form class="premium-form" action="/save_enq/" method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6">
+                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
               </div>
             </div>
-          </div>
+            <input type="text" class="form-control" name="mobile" placeholder="Contact Number (Optional)">
+            <textarea class="form-control" name="massage" rows="4"
+              placeholder="How is the site performance? Any UI suggestions?" required style="resize: none;"></textarea>
 
-          <div class="col-12 mb-4">
-            <div class="premium-card">
-              <h4 class="mb-3 text-white"><i class="fa fa-briefcase mr-2" style="color: var(--primary-color);"></i>
-                Experience</h4>
-              <p class="text-muted mb-0">
-                Built multiple academic and personal projects including admin dashboards, portfolio sites, and
-                e-commerce platforms. Specialized in fast, responsive backends.
-              </p>
-            </div>
-          </div>
+            <button type="submit" class="btn-premium w-100 mt-3" style="font-size: 1.1rem; padding: 15px;">
+              <i class="fa fa-database mr-2"></i> Submit to Admin Database
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <div class="col-12">
-            <div class="premium-card">
-              <h4 class="mb-3 text-white"><i class="fa fa-rocket mr-2" style="color: var(--primary-color);"></i> Goals
-              </h4>
-              <p class="text-muted mb-0">
-                To become a strong full-stack engineer, master cloud architectures, and ship real-world products that
-                solve genuine problems.
-              </p>
-            </div>
+<!-- Owner Profile Section -->
+<div class="section-padding" style="border-top: 1px solid var(--card-border);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title mb-3">Meet the <span>Creator</span></h2>
+      <p class="text-muted max-w-2xl mx-auto" style="max-width: 700px;">
+        The architect and developer behind this platform.
+      </p>
+    </div>
+    <div class="row justify-content-center">
+      {% for i in user_data|slice:":1" %}
+      <div class="col-lg-8 text-center">
+        <div class="premium-card p-5">
+          <img src="/{{ i.profile_image }}" alt="{{ i.name }}" class="img-fluid mb-4 shadow"
+            style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover; border: 4px solid var(--primary-color);">
+          <h3 class="text-white mb-2">{{ i.name }}</h3>
+          <p class="text-muted mb-4" style="font-size: 1.1rem;"><i class="fa fa-map-marker-alt mr-2"
+              style="color: var(--primary-color);"></i>{{ i.address|default:"Location Not Provided" }}</p>
+
+          <p class="text-muted mb-4 mx-auto" style="max-width: 600px; font-size: 1.05rem; line-height: 1.8;">
+            Passionate about building scalable backends and beautiful user interfaces. Dedicated to creating software
+            that makes a difference. Always exploring new frameworks, refining architecture, and perfecting the user
+            experience.
+          </p>
+
+          <div class="social-icons-premium justify-content-center mt-4">
+            {% if i.linkedin %}
+            <a href="{{ i.linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+            {% endif %}
+            {% if i.facebook %}
+            <a href="{{ i.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a>
+            {% endif %}
+            <a href="mailto:{{ i.email }}"><i class="fa fa-envelope"></i></a>
           </div>
         </div>
       </div>
-
+      {% empty %}
+      <div class="col-12 text-center py-5">
+        <p class="text-muted">Creator profile has not been configured.</p>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </div>

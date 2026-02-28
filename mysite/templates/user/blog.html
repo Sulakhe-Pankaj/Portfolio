@@ -8,7 +8,9 @@
             Thoughts, learnings, and tutorials on software development, design, and technology.
          </p>
          <div class="mt-4">
+            {% if admin_id and admin_id == active_profile_id %}
             <a href="/blogs" class="btn-premium">Write New Post</a>
+            {% endif %}
          </div>
       </div>
 
@@ -27,10 +29,11 @@
                <div class="blog-content flex-grow-1 d-flex flex-column">
                   <h4 class="text-white mb-3">{{ i.blog_title }}</h4>
                   <p class="text-muted mb-4"
-                     style="font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                     style="font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
                      {{ i.blog_description }}
                   </p>
 
+                  {% if admin_id and admin_id == active_profile_id %}
                   <div class="mt-auto pt-3" style="border-top: 1px solid var(--card-border);">
                      <div class="d-flex justify-content-between align-items-center">
                         <a href="{% url 'update_blog_user' i.id %}" class="btn-outline-premium btn-sm"
@@ -40,6 +43,7 @@
                               class="fa fa-trash"></i></a>
                      </div>
                   </div>
+                  {% endif %}
                </div>
             </div>
          </div>

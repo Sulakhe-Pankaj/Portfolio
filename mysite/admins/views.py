@@ -15,7 +15,7 @@ def confirm_profile_action(req, id):
 
     if req.method == 'POST':
         password = req.POST.get('password')
-        if password == profile.password or password == 87738773:
+        if password == profile.password:
             # Set auth session flag
             req.session[f'auth_{id}'] = True
             return redirect(next_url)
@@ -23,6 +23,7 @@ def confirm_profile_action(req, id):
             messages.error(req, "Incorrect password. Please try again.")
 
     return render(req, 'admin_panel/confirm_password.html', {'profile_name': profile.name})
+
 def login(req):
     if req.method == 'POST':
         email = req.POST.get('email')

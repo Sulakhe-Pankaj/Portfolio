@@ -4,119 +4,56 @@ from django.http import HttpResponse
 from django.contrib import messages
 
 # Create your views here.
-def home(req):
+def get_public_context(req):
+    active_profile = models.profile.objects.filter(is_active=True).first()
+    if not active_profile:
+        active_profile = models.profile.objects.first()
+    
     admin_id = req.session.get('admin_id')
-    if not admin_id:
-        return redirect('/login/')
-        
-    user_data = models.profile.objects.filter(id=admin_id)
+    
+    if active_profile:
+        user_data = models.profile.objects.filter(id=active_profile.id)
+        service_data = models.Service.objects.filter(profile_id=active_profile.id) 
+        project_data = models.project.objects.filter(profile_id=active_profile.id) 
+        blog_data = models.blog.objects.filter(profile_id=active_profile.id) 
+    else:
+        user_data = service_data = project_data = blog_data = []
+
     all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.filter(profile_id=admin_id) 
-    project_data = models.project.objects.filter(profile_id=admin_id) 
-    blog_data = models.blog.objects.filter(profile_id=admin_id) 
-    obj =  {
-        'user_data':user_data,
-        'all_profiles':all_profiles,
-        'service_data':service_data,
-        'project_data':project_data,
-        'blog_data':blog_data
+    
+    return {
+        'user_data': user_data,
+        'all_profiles': all_profiles,
+        'service_data': service_data,
+        'project_data': project_data,
+        'blog_data': blog_data,
+        'admin_id': admin_id,
+        'active_profile_id': active_profile.id if active_profile else None
     }
-    return render (req,'user/index.html',obj)
+
+def home(req):
+    obj = get_public_context(req)
+    return render(req, 'user/index.html', obj)
     
 def about(req):
-    admin_id = req.session.get('admin_id')
-    if not admin_id:
-        return redirect('/login/')
-        
-    user_data = models.profile.objects.filter(id=admin_id)
-    all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.filter(profile_id=admin_id) 
-    project_data = models.project.objects.filter(profile_id=admin_id) 
-    blog_data = models.blog.objects.filter(profile_id=admin_id) 
-    obj =  {
-        'user_data':user_data,
-        'all_profiles':all_profiles,
-        'service_data':service_data,
-        'project_data':project_data,
-        'blog_data':blog_data
-    }
-    return render (req,'user/about.html',obj)
+    obj = get_public_context(req)
+    return render(req, 'user/about.html', obj)
     
 def contact(req):
-    admin_id = req.session.get('admin_id')
-    if not admin_id:
-        return redirect('/login/')
-        
-    user_data = models.profile.objects.filter(id=admin_id)
-    all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.filter(profile_id=admin_id) 
-    project_data = models.project.objects.filter(profile_id=admin_id) 
-    blog_data = models.blog.objects.filter(profile_id=admin_id) 
-    obj =  {
-        'user_data':user_data,
-        'all_profiles':all_profiles,
-        'service_data':service_data,
-        'project_data':project_data,
-        'blog_data':blog_data
-    }
-    return render (req,'user/contact.html',obj)
+    obj = get_public_context(req)
+    return render(req, 'user/contact.html', obj)
     
 def portfolio(req):
-    admin_id = req.session.get('admin_id')
-    if not admin_id:
-        return redirect('/login/')
-        
-    user_data = models.profile.objects.filter(id=admin_id)
-    all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.filter(profile_id=admin_id) 
-    project_data = models.project.objects.filter(profile_id=admin_id) 
-    blog_data = models.blog.objects.filter(profile_id=admin_id) 
-    obj =  {
-        'user_data':user_data,
-        'all_profiles':all_profiles,
-        'service_data':service_data,
-        'project_data':project_data,
-        'blog_data':blog_data
-    } 
-    return render (req,'user/portfolio.html',obj)
+    obj = get_public_context(req)
+    return render(req, 'user/portfolio.html', obj)
     
 def blog(req):
-    admin_id = req.session.get('admin_id')
-    if not admin_id:
-        return redirect('/login/')
-        
-    user_data = models.profile.objects.filter(id=admin_id)
-    all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.filter(profile_id=admin_id) 
-    project_data = models.project.objects.filter(profile_id=admin_id) 
-    blog_data = models.blog.objects.filter(profile_id=admin_id) 
-    obj =  {
-        'user_data':user_data,
-        'all_profiles':all_profiles,
-        'service_data':service_data,
-        'project_data':project_data,
-        'blog_data':blog_data
-    }
-    return render (req,'user/blog.html',obj)
+    obj = get_public_context(req)
+    return render(req, 'user/blog.html', obj)
     
 def service(req):
-    admin_id = req.session.get('admin_id')
-    if not admin_id:
-        return redirect('/login/')
-        
-    user_data = models.profile.objects.filter(id=admin_id)
-    all_profiles = models.profile.objects.all()
-    service_data = models.Service.objects.filter(profile_id=admin_id) 
-    project_data = models.project.objects.filter(profile_id=admin_id) 
-    blog_data = models.blog.objects.filter(profile_id=admin_id) 
-    obj =  {
-        'user_data':user_data,
-        'all_profiles':all_profiles,
-        'service_data':service_data,
-        'project_data':project_data,
-        'blog_data':blog_data
-    }
-    return render (req,'user/service.html',obj)
+    obj = get_public_context(req)
+    return render(req, 'user/service.html', obj)
 
 def save_enq(req):
     if req.method == "POST":

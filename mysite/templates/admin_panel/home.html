@@ -31,7 +31,18 @@
                                 style="border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.1);"
                                 class="mr-3">
                             <div>
-                                <h6 class="text-white mb-1" style="font-size: 0.95rem;">{{ user.name }}</h6>
+                                <h6 class="text-white mb-1" style="font-size: 0.95rem;">
+                                    {{ user.name }}
+                                    {% if current_admin_id == user.id %}
+                                    <span
+                                        style="display:inline-block; width:8px; height:8px; background-color:#10b981; border-radius:50%; margin-left:5px; box-shadow: 0 0 5px #10b981;"
+                                        title="Online"></span>
+                                    {% else %}
+                                    <span
+                                        style="display:inline-block; width:8px; height:8px; background-color:#6b7280; border-radius:50%; margin-left:5px;"
+                                        title="Offline"></span>
+                                    {% endif %}
+                                </h6>
                                 <small class="text-muted">DOB: {{ user.dob }}</small>
                             </div>
                         </div>

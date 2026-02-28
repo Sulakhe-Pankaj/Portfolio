@@ -10,6 +10,14 @@
       content="Welcome to Pankaj-Portfolio. Explore my professional projects, core skills, services, and latest thoughts.">
    <title>Pankaj-Portfolio</title>
 
+   {% if user_data %}
+   {% for i in user_data|slice:":1" %}
+   <link rel="icon" type="image/x-icon" href="/{{i.profile_image}}">
+   {% endfor %}
+   {% else %}
+   <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+   {% endif %}
+
    <!-- bootstrap css -->
    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 
