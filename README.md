@@ -1,44 +1,104 @@
-# Premium Django Portfolio
+# 🚀 Personal Portfolio Website
 
-A modern, minimalist portfolio application built with Django, featuring a unified premium glassmorphic UI and a dynamic multi-profile administration system.
+A dynamic personal portfolio website built using Django and MySQL to showcase projects, skills, and technical work in a structured and professional format.
 
-## 🌟 Key Features
-- **Dynamic Content**: Manage your Services, Projects, Blogs, and Portfolios intuitively from a dedicated secure admin dashboard.
-- **Premium UI Redesign**: A globally consistent dark mode aesthetic utilizing transparent layouts, rounded borders, and smooth micro-animations across *both* public and admin panels.
-- **Multi-Profile Controller**: Supports multiple admin profile instances in the database. Instantly switch the "Active" public-facing profile with a one-click toggle in the admin dashboard.
-- **Render Ready**: Fully equipped with `render.yaml`, `build.sh`, Gunicorn, WhiteNoise, and PostgreSQL configurations for 1-click cloud deployment on [Render.com](https://render.com/).
+## 📌 Overview
 
-## 💻 Local Development Setup
+This portfolio platform highlights my development journey, technical stack, and completed projects.
+It is designed with a clean UI and a scalable backend architecture.
 
-Follow these steps to run the portfolio on your local machine:
+## ✨ Features
 
-```bash
-# 1. Create and activate a virtual environment
-python3 -m venv .venv
-source .venv/bin/activate
+- Project showcase with detailed descriptions
+- Dynamic content management
+- Admin panel for managing projects
+- User authentication system
+- Responsive design
+- Cloudinary integration for media storage
 
-# 2. Navigate into the application directory
-cd mysite
+## 🛠 Tech Stack
 
-# 3. Install all required dependencies
-pip install -r requirements.txt
+**Backend**
+- Python
+- Django
 
-# 4. Setup the local database
-python3 manage.py makemigrations
-python3 manage.py migrate
+**Database**
+- MySQL
 
-# 5. Start the local server
-python3 manage.py runserver
+**Frontend**
+- HTML
+- CSS
+- Bootstrap
+
+**Media Storage**
+- Cloudinary
+
+## 📂 Project Structure
+```text
+mysite/
+│
+├── website/          # Main app
+├── admins/           # Admin-related features
+├── static/           # Static files
+├── templates/        # HTML templates
+├── manage.py
+└── requirements.txt
 ```
-Visit `http://127.0.0.1:8000/home/` in your browser to view the application. 
-Access `http://127.0.0.1:8000/admin/` to manage the content (Default credentials required depending on your local profile setup).
 
-## 🚀 Deployment (Render)
+## ⚙️ Installation & Setup
 
-This project contains a Blueprint specification (`render.yaml`) to instantly deploy a live application and a connected PostgreSQL database.
+**1️⃣ Clone the repository**
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
 
-1. Commit and push this repository to your GitHub account.
-2. Sign in to [Render.com](https://render.com/) and navigate to the dashboard.
-3. Click **New +** and select **Blueprint**.
-4. Connect the GitHub repository you just pushed to.
-5. Render will automatically read the `render.yaml` file, provision the secure database, execute `build.sh`, and launch your Web Service!
+**2️⃣ Create virtual environment**
+```bash
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+```
+
+**3️⃣ Install dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+**4️⃣ Configure environment variables**
+
+Create a `.env` file and add:
+```env
+SECRET_KEY=your_secret_key
+DEBUG=True
+AIVEN_DB_PASSWORD=your_db_password
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+**5️⃣ Apply migrations**
+```bash
+python manage.py migrate
+```
+
+**6️⃣ Run server**
+```bash
+python manage.py runserver
+```
+
+## 🌍 Live Demo
+
+https://portfolio-c2z1.onrender.com
+
+## 📈 Future Improvements
+
+- Blog section
+- Contact form with email integration
+- Dark mode
+- Analytics dashboard
+
+## 👤 Author
+
+**Pankaj**  
+Backend & Full Stack Developer
