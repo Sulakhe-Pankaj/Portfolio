@@ -75,13 +75,13 @@
                <li class="nav-item dropdown ml-3">
                   <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown"
                      role="button" data-toggle="dropdown" style="padding:0 !important;">
-                     <img src="/{{i.profile_image}}" class="nav-profile-img" alt="Profile">
+                     <img src="{{i.profile_image.url}}" class="nav-profile-img" alt="Profile">
                   </a>
                   <div class="dropdown-menu dropdown-menu-right"
                      style="background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 12px; padding: 10px;">
                      <div class="px-3 py-2 text-center border-bottom"
                         style="border-color: var(--card-border) !important;">
-                        <img src="/{{i.profile_image}}" class="nav-profile-img mb-2" style="width:50px; height:50px;">
+                        <img src="{{i.profile_image.url}}" class="nav-profile-img mb-2" style="width:50px; height:50px;">
                         <h6 class="mb-0 text-white">{{i.name}}</h6>
                         <small class="text-muted">{{i.email}}</small>
                      </div>
@@ -94,7 +94,7 @@
                         {% if not p.is_active %}
                         <a class="dropdown-item text-white mt-1 p-1 d-flex align-items-center"
                            href="{% url 'switch_profile' p.id %}" style="transition:0.3s; border-radius: 6px;">
-                           <img src="/{{p.profile_image}}" class="nav-profile-img mr-2"
+                           <img src="{{p.profile_image.url}}" class="nav-profile-img mr-2"
                               style="width:25px; height:25px; border-width: 1px;">
                            <span style="font-size: 0.85rem;">{{ p.name }}</span>
                         </a>

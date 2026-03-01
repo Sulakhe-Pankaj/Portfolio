@@ -49,14 +49,14 @@
                                 <label class="text-white mb-2">Profile Image</label>
                                 <div class="form-control d-flex align-items-center mb-2"><input type="file"
                                         name="profile_image" style="color:var(--text-muted); font-size:0.9rem;"></div>
-                                {% if user.profile_image %}<img src="/{{user.profile_image}}" width="60"
+                                {% if user.profile_image %}<img src="{{user.profile_image.url}}" width="60"
                                     style="border-radius: 5px;">{% endif %}
                             </div>
                             <div class="col-md-6 form-group mb-4">
                                 <label class="text-white mb-2">Background Image</label>
                                 <div class="form-control d-flex align-items-center mb-2"><input type="file"
                                         name="bg_image" style="color:var(--text-muted); font-size:0.9rem;"></div>
-                                {% if user.bg_image %}<img src="/{{user.bg_image}}" width="60"
+                                {% if user.bg_image %}<img src="{{user.bg_image.url}}" width="60"
                                     style="border-radius: 5px;">{% endif %}
                             </div>
                             <div class="col-12 text-center mt-3 d-flex justify-content-between">
