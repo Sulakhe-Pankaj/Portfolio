@@ -21,7 +21,7 @@
          <div class="col-lg-4 col-md-6 mb-4">
             <div class="premium-card text-center" style="position: relative;">
                <!-- Action Buttons -->
-               {% if admin_id and admin_id == active_profile_id %}
+               {% if admin_id and admin_id == s.profile_id %}
                <div style="position: absolute; top: 15px; right: 15px; z-index: 10;">
                   <a href="{% url 'update_service_user' s.id %}" class="btn-outline-premium"
                      style="padding: 5px 10px; font-size: 0.8rem; margin-right: 5px;" title="Update">

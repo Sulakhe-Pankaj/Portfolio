@@ -14,10 +14,16 @@ class profile(models.Model):
      linkedin = models.URLField(max_length=300)
      is_active = models.BooleanField(default=False)
 
+     def __str__(self):
+         return self.name
+
 class Service(models.Model):
     profile = models.ForeignKey(profile, on_delete=models.CASCADE, null=True, blank=True)
     service_image = models.ImageField(upload_to='static/asset')
     service_title = models.CharField(max_length=300)
+
+    def __str__(self):
+        return f"{self.service_title} ({self.profile.name if self.profile else 'No Profile'})"
 
 class project(models.Model):
      profile = models.ForeignKey(profile, on_delete=models.CASCADE, null=True, blank=True)
@@ -27,6 +33,9 @@ class project(models.Model):
      project_link = models.URLField(max_length=300)
      project_duration = models.CharField(max_length=100)
 
+     def __str__(self):
+         return f"{self.project_name} ({self.profile.name if self.profile else 'No Profile'})"
+
 class blog(models.Model):
     profile = models.ForeignKey(profile, on_delete=models.CASCADE, null=True, blank=True)
     blog_date = models.DateField()
@@ -34,12 +43,18 @@ class blog(models.Model):
     blog_title = models.CharField(max_length=200)
     blog_description = models.TextField()
 
+    def __str__(self):
+        return f"{self.blog_title} ({self.profile.name if self.profile else 'No Profile'})"
+
 class enq(models.Model):
      profile = models.ForeignKey(profile, on_delete=models.CASCADE, null=True, blank=True)
      name = models.TextField(max_length=300)
      email = models.TextField(max_length=300)
      mobile = models.CharField(max_length=15)
      massage = models.TextField(max_length=300)
+
+     def __str__(self):
+         return f"{self.name} ({self.profile.name if self.profile else 'No Profile'})"
 
 
 

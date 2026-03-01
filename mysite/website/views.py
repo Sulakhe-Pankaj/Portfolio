@@ -5,19 +5,21 @@ from django.contrib import messages
 
 # Create your views here.
 def get_public_context(req):
-    active_profile = models.profile.objects.filter(is_active=True).first()
-    if not active_profile:
-        active_profile = models.profile.objects.first()
-    
     admin_id = req.session.get('admin_id')
     
+    if admin_id:
+        active_profile = models.profile.objects.filter(id=admin_id).first()
+    else:
+        active_profile = None
+
     if active_profile:
         user_data = models.profile.objects.filter(id=active_profile.id)
-        service_data = models.Service.objects.filter(profile_id=active_profile.id) 
-        project_data = models.project.objects.filter(profile_id=active_profile.id) 
-        blog_data = models.blog.objects.filter(profile_id=active_profile.id) 
     else:
-        user_data = service_data = project_data = blog_data = []
+        user_data = []
+        
+    service_data = models.Service.objects.all() 
+    project_data = models.project.objects.all() 
+    blog_data = models.blog.objects.all() 
 
     all_profiles = models.profile.objects.all()
     
@@ -32,26 +34,38 @@ def get_public_context(req):
     }
 
 def home(req):
+    if not req.session.get('admin_id'):
+        return redirect('/login/')
     obj = get_public_context(req)
     return render(req, 'user/index.html', obj)
     
 def about(req):
+    if not req.session.get('admin_id'):
+        return redirect('/login/')
     obj = get_public_context(req)
     return render(req, 'user/about.html', obj)
     
 def contact(req):
+    if not req.session.get('admin_id'):
+        return redirect('/login/')
     obj = get_public_context(req)
     return render(req, 'user/contact.html', obj)
     
 def portfolio(req):
+    if not req.session.get('admin_id'):
+        return redirect('/login/')
     obj = get_public_context(req)
     return render(req, 'user/portfolio.html', obj)
     
 def blog(req):
+    if not req.session.get('admin_id'):
+        return redirect('/login/')
     obj = get_public_context(req)
     return render(req, 'user/blog.html', obj)
     
 def service(req):
+    if not req.session.get('admin_id'):
+        return redirect('/login/')
     obj = get_public_context(req)
     return render(req, 'user/service.html', obj)
 

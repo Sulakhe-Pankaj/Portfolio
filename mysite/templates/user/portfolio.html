@@ -24,7 +24,7 @@
                <div class="project-overlay"
                   style="flex-direction: column; align-items: stretch; justify-content: flex-end; padding: 20px;">
 
-                  {% if admin_id and admin_id == active_profile_id %}
+                  {% if admin_id and admin_id == p.profile_id %}
                   <div class="d-flex justify-content-between mb-3 w-100">
                      <a href="{{ p.project_link }}" class="btn-premium btn-sm flex-grow-1 text-center mr-2"
                         style="padding: 10px 0;">Live Demo</a>
