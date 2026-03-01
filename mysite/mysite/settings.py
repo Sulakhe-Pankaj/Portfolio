@@ -168,8 +168,8 @@ STORAGES = {
     },
 }
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'dtidn6xez'),
-#     'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '499325662913598'),
-#     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 'Bz6kw4vRTBIVJyOjK_89WaSEU9Q')
-# }
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'dtidn6xez'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '499325662913598'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 'Bz6kw4vRTBIVJyOjK_89WaSEU9Q')
+}
