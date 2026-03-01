@@ -20,7 +20,7 @@
          {% for p in project_data %}
          <div class="col-lg-4 col-md-6 mb-5">
             <div class="project-card" style="margin-bottom: 15px;">
-               <img src="/{{ p.project_image }}" alt="Project" class="project-img" style="height: 300px;">
+               <img src="{{ p.project_image.url }}" alt="Project" class="project-img" style="height: 300px;">
                <div class="project-overlay"
                   style="flex-direction: column; align-items: stretch; justify-content: flex-end; padding: 20px;">
 

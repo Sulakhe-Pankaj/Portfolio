@@ -18,7 +18,7 @@
                             <label class="text-white mb-2">Blog Image</label>
                             <div class="form-control d-flex align-items-center mb-2"><input type="file"
                                     name="blog_image" style="color:var(--text-muted); font-size:0.9rem;"></div>
-                            {% if blog.blog_image %}<img src="/{{ blog.blog_image }}" width="80"
+                            {% if blog.blog_image %}<img src="{{ blog.blog_image.url }}" width="80"
                                 style="border-radius: 8px;">{%
                             endif %}
                         </div>

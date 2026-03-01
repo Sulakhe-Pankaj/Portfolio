@@ -23,7 +23,7 @@
                                     style="color:var(--text-muted); font-size:0.9rem;">
                             </div>
                             {% if services.service_image %}
-                            <img src="/{{ services.service_image }}" width="60" style="border-radius: 8px;">
+                            <img src="{{ services.service_image.url }}" width="60" style="border-radius: 8px;">
                             {% endif %}
                         </div>
                         <div class="text-center mt-4 d-flex justify-content-between">

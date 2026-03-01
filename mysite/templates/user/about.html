@@ -184,7 +184,7 @@
       {% for i in user_data|slice:":1" %}
       <div class="col-lg-8 text-center">
         <div class="premium-card p-5">
-          <img src="/{{ i.profile_image }}" alt="{{ i.name }}" class="img-fluid mb-4 shadow"
+          <img src="{{ i.profile_image.url }}" alt="{{ i.name }}" class="img-fluid mb-4 shadow"
             style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover; border: 4px solid var(--primary-color);">
           <h3 class="text-white mb-2">{{ i.name }}</h3>
           <p class="text-muted mb-4" style="font-size: 1.1rem;"><i class="fa fa-map-marker-alt mr-2"

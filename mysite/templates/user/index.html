@@ -34,7 +34,7 @@
                <div
                   style="position: absolute; width: 100%; height: 100%; border: 2px solid var(--primary-color); border-radius: 30px; transform: translate(20px, 20px); z-index: -1;">
                </div>
-               <img src="/{{ i.profile_image }}" alt="{{ i.name }}" class="img-fluid"
+               <img src="{{ i.profile_image.url }}" alt="{{ i.name }}" class="img-fluid"
                   style="border-radius: 30px; max-height: 500px; object-fit: cover; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
             </div>
          </div>
@@ -91,7 +91,7 @@
          {% for p in project_data|slice:":3" %}
          <div class="col-lg-4 col-md-6 mb-4">
             <div class="project-card">
-               <img src="/{{ p.project_image }}" alt="{{ p.project_name }}" class="project-img">
+               <img src="{{ p.project_image.url }}" alt="{{ p.project_name }}" class="project-img">
                <div class="project-overlay">
                   <a href="{{ p.project_link }}" class="btn-premium btn-sm"
                      style="padding: 8px 20px; font-size: 0.9rem;">Live Demo</a>
@@ -119,7 +119,7 @@
          <div class="col-lg-4 col-md-6 mb-4">
             <div class="blog-card" style="display: flex; flex-direction: column;">
                <div class="position-relative">
-                  <img src="/{{ i.blog_image }}" alt="Blog Image" class="blog-img">
+                  <img src="{{ i.blog_image.url }}" alt="Blog Image" class="blog-img">
                   <div
                      style="position: absolute; top: 15px; left: 15px; background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
                      {{ i.blog_date }}

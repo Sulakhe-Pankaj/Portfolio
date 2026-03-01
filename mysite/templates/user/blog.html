@@ -19,7 +19,7 @@
          <div class="col-lg-4 col-md-6 mb-4">
             <div class="blog-card" style="display: flex; flex-direction: column;">
                <div class="position-relative">
-                  <img src="/{{ i.blog_image }}" alt="Blog Image" class="blog-img">
+                  <img src="{{ i.blog_image.url }}" alt="Blog Image" class="blog-img">
                   <div
                      style="position: absolute; top: 15px; left: 15px; background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
                      {{ i.blog_date }}

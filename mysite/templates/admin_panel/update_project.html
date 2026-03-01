@@ -19,7 +19,7 @@
                                 <label class="text-white mb-2">Project Image</label>
                                 <div class="form-control d-flex align-items-center mb-2"><input type="file"
                                         name="project_image" style="color:var(--text-muted); font-size:0.9rem;"></div>
-                                {% if project.project_image %}<img src="/{{ project.project_image }}" width="80"
+                                {% if project.project_image %}<img src="{{ project.project_image.url }}" width="80"
                                     style="border-radius: 8px;">{% endif %}
                             </div>
                             <div class="col-md-6 form-group mb-4">
