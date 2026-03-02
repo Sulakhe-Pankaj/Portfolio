@@ -91,3 +91,4 @@ whisper==1.1.10
 whitenoise==6.11.0
 yt-dlp==2025.10.22
 python-dotenv==1.0.1
+pymysql==1.1.0
